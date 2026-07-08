@@ -1,10 +1,10 @@
 const express = require('express');
-const path = require('path');
+const path = path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Lee la API Key de Groq (o usa HF_TOKEN si pegaste ahí la clave de Groq)
+// Lee la API Key de Groq (o usa HF_TOKEN si pegaste ahí la clave)
 const GROQ_API_KEY = process.env.GROQ_API_KEY || process.env.HF_TOKEN;
 
 app.use(express.json());
@@ -47,9 +47,9 @@ app.post('/transformar', async (req, res) => {
     });
   }
 
-  // 2. GENERAR COLUMNA VIA GROQ (LLAMA 3.3 70B - GRATIS Y ULTRARRÁPIDO)
+  // 2. GENERAR COLUMNA VIA GROQ (Exactamente 3 párrafos, sin titular)
   try {
-    const prompt = `Transforma el siguiente texto en una columna escrita con el estilo de Mariano Rajoy (frases obvias, redundantes, solemnes, redactado de forma sencilla para un niño de 5 años). Máximo 4 párrafos e incluye un titular al principio. No menciones el enlace ni la fuente.\n\nTexto:\n${articleText.substring(0, 3000)}`;
+    const prompt = `Transforma el siguiente texto en un comentario redactado con el estilo inconfundible de Mariano Rajoy (frases obvias, redundantes, solemnes, redactado de forma sencilla para un niño de 5 años).\n\nInstrucciones estrictas:\n- Genera exactamente 3 párrafos.\n- NO incluyas ningún titular, título ni encabezado al principio.\n- Empieza directamente con el primer párrafo del texto.\n- No menciones el enlace ni la fuente.\n\nTexto:\n${articleText.substring(0, 3000)}`;
 
     const groqResponse = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
@@ -74,7 +74,7 @@ app.post('/transformar', async (req, res) => {
       throw new Error(errorMsg);
     }
 
-    const columnResult = groqData.choices?.[0]?.message?.content || "No se pudo generar la columna.";
+    const columnResult = groqData.choices?.[0]?.message?.content || "No se pudo generar el texto.";
 
     const headers = [
       "Aquí tienes tu texto para que lo entienda todo el mundo, si es que todo el mundo lo puede entender, ¡viva el vino!",
@@ -93,7 +93,7 @@ app.post('/transformar', async (req, res) => {
   } catch (err) {
     console.error("Error en IA:", err);
     return res.status(500).json({
-      error: `Error al generar la columna: ${err.message}`
+      error: `Error al generar el texto: ${err.message}`
     });
   }
 });
