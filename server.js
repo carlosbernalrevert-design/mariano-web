@@ -8,12 +8,6 @@ const HF_TOKEN = process.env.HF_TOKEN;
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-const POLITICS_KEYWORDS = [
-  "elecciones", "gobierno", "ministro", "presidente", "partido", 
-  "congreso", "parlamento", "campaña", "voto", "coalición", 
-  "diputado", "senado", "oposición", "amnistia", "mocion"
-];
-
 app.post('/transformar', async (req, res) => {
   const { url } = req.body;
 
@@ -38,20 +32,10 @@ app.post('/transformar', async (req, res) => {
       throw new Error("El enlace no contiene texto extraíble.");
     }
 
-    // 2. Filtro de política
-    const lowerText = articleText.toLowerCase();
-    if (POLITICS_KEYWORDS.some(word => lowerText.includes(word))) {
-      return res.json({
-        type: 'politics',
-        header: 'MarIAno entiende de todo, menos de política.',
-        content: '“Mire usted, yo de fútbol hablo encantado, y si me apuran, también de ciclismo. Pero de otras cosas no, que para eso ya hay gente muy preparada.”'
-      });
-    }
+    // 2. Prompt de transformación (sin filtros)
+    const prompt = `Transforma el siguiente texto en una columna al estilo de Mariano Rajoy (frases obvias, redundantes, solemnes, redactado de forma sencilla para un niño de 5 años). Máximo 4 párrafos e incluye un titular al principio. No menciones el enlace ni la fuente.\n\nTexto:\n${articleText.substring(0, 2500)}`;
 
-    // 3. Prompt de transformación
-    const prompt = `Transforma el siguiente texto en una columna al estilo de Mariano Rajoy (frases obvias, redundantes, solemnes, redactado de forma sencilla para un niño de 5 años). Máximo 4 párrafos e incluye un titular. No menciones el enlace ni la fuente.\n\nTexto:\n${articleText.substring(0, 2500)}`;
-
-    // 4. Llamada a la Inference API de Hugging Face
+    // 3. Llamada a Hugging Face
     const hfResponse = await fetch('https://api-inference.huggingface.co/models/Qwen/Qwen2.5-Coder-32B-Instruct', {
       method: 'POST',
       headers: {
