@@ -17,7 +17,7 @@ app.post('/transformar', async (req, res) => {
 
   let articleText = "";
 
-  // 1. EXTRAER TEXTO DE LA NOTICIA
+  // 1. EXTRAER TEXTO DE LA NOTICIA VIA JINA AI
   try {
     const cleanUrl = url.trim().replace(/^https?:\/\//, '');
     const jinaUrl = `https://r.jina.ai/https://${cleanUrl}`;
@@ -45,37 +45,34 @@ app.post('/transformar', async (req, res) => {
     });
   }
 
-  // 2. GENERAR COLUMNA CON IA
+  // 2. GENERAR COLUMNA CON LA NUEVA RUTA API DE HUGGING FACE
   try {
     const prompt = `Transforma el siguiente texto en una columna escrita con el estilo de Mariano Rajoy (frases obvias, redundantes, solemnes, redactado de forma sencilla para un niño de 5 años). Máximo 4 párrafos e incluye un titular al principio. No menciones el enlace ni la fuente.\n\nTexto:\n${articleText.substring(0, 2000)}`;
 
-    const hfResponse = await fetch('https://api-inference.huggingface.co/models/Qwen/Qwen2.5-Coder-32B-Instruct', {
+    const hfResponse = await fetch('https://router.huggingface.co/hf-inference/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${HF_TOKEN}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        inputs: prompt,
-        parameters: { max_new_tokens: 500, temperature: 0.7 }
+        model: 'Qwen/Qwen2.5-Coder-32B-Instruct',
+        messages: [
+          { role: 'user', content: prompt }
+        ],
+        max_tokens: 500,
+        temperature: 0.7
       })
     });
 
     const hfData = await hfResponse.json();
 
     if (!hfResponse.ok) {
-      const errorMsg = hfData.error || JSON.stringify(hfData);
+      const errorMsg = hfData.error || hfData.message || JSON.stringify(hfData);
       throw new Error(errorMsg);
     }
 
-    let columnResult = "";
-    if (Array.isArray(hfData) && hfData[0]?.generated_text) {
-      columnResult = hfData[0].generated_text.replace(prompt, '').trim();
-    } else if (hfData.generated_text) {
-      columnResult = hfData.generated_text.replace(prompt, '').trim();
-    } else {
-      columnResult = typeof hfData === 'string' ? hfData : JSON.stringify(hfData);
-    }
+    const columnResult = hfData.choices?.[0]?.message?.content || "No se pudo generar la respuesta.";
 
     const headers = [
       "Aquí tienes tu texto para que lo entienda todo el mundo, si es que todo el mundo lo puede entender, ¡viva el vino!",
