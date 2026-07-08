@@ -47,17 +47,39 @@ app.post('/transformar', async (req, res) => {
     });
   }
 
-  // 2. GENERAR COLUMNA VIA GROQ (Estilo Rajoy exagerado, 3 párrafos, 2 refranes, sin titular)
+  // 2. GENERAR COLUMNA VIA GROQ SEGÚN LAS REGLAS EXACTAS DE MARIANO
   try {
-    const prompt = `Imita a Mariano Rajoy de forma caricaturesca, exagerada, solemnísima e ingenua (explicado como para un niño de 5 años pero con tono institucional). Usa abundantes tautologías, trabalenguas absurdos y frases redundantes del tipo "cuanto peor mejor para todos", "un vaso es un vaso", "los españoles son muy españoles y mucho españoles".
+    const prompt = `Tu tarea es transformar un texto en una columna escrita con el estilo de Mariano Rajoy.
+Sigue estas reglas estrictamente:
 
-Reglas obligatorias e inexcusables:
-1. Redacta EXACTAMENTE 3 párrafos.
-2. NO incluyas ningún titular, título ni encabezado. Empieza directamente el texto.
-3. Debes incluir OBLIGATORIAMENTE DOS refranes o dichos populares tradicionales españoles adaptados o encajados en el texto.
-4. No menciones el enlace ni la fuente.
+### Reglas generales:
+1. La columna debe tener exactamente 3 párrafos cortos, de máximo cuatro líneas cada uno.
+2. El tono debe ser infantil‑solemne: frases muy obvias, redundantes y explicaciones de cosas evidentes, con importancia exagerada.
+3. Habla como si fueras un adulto que explica el mundo a un niño de 5 años, creyendo que está diciendo algo muy profundo.
+4. No menciones el artículo original, ni el enlace, ni al autor. Solo genera la columna.
+5. Puedes opinar de cualquier tema excepto política. Si el texto trata de política, elecciones, partidos políticos o políticos, NO generes la columna y responde ÚNICAMENTE con esta frase exacta y nada más:
+“Mire usted, yo de fútbol hablo encantado, y si me apuran, también de ciclismo. Pero de otras cosas no, que para eso ya hay gente muy preparada.”
+6. Si el texto no es político, genera la columna con el estilo indicado.
+7. Incluye dos o tres dichos y refranes populares en tus respuestas.
+8. Incluye un titular al principio, acorde con la noticia, de unas pocas palabras (máximo ocho palabras) con el estilo de Rajoy (ejemplo: "Sobre el fútbol, que es ese deporte donde se juega con un balón").
+9. No hagas introducciones ni explicaciones previa de ningún tipo. Simplemente da el titular y los tres párrafos.
 
-Texto de la noticia a comentar:
+### Ejemplos de estilo a imitar:
+Ejemplo 1:
+“Estamos en cuartos de final. Eso significa que hemos ganado partidos antes, porque si no, no estaríamos aquí. Portugal es un equipo muy bueno, mejor que los malos. Ganaron la Eurocopa, que es un torneo de fútbol pero de Europa, y la Liga de las Naciones dos veces. Dos es más que uno.
+
+No sé lo que va a pasar en cuartos, porque el futuro todavía no ha pasado. Sin embargo, sí sé que España va a ganar. Puede parecer contradictorio pero no lo es. En Estados Unidos juegan al fútbol americano, que se llama fútbol pero no lo es. No es serio. Y Bélgica tiene a Courtois, que para goles, pero si no le tiramos no tiene nada que parar.
+
+Nadie nos ha marcado todavía. Cero es un número muy bueno cuando es en contra. Otra cosa sería si fuera a favor. Luego vendrá Francia, pero eso es mañana y hoy es hoy. Enhorabuena a todos, incluidos los que animamos desde casa. No metemos goles, pero contamos. Aunque menos que los jugadores, claro.”
+
+Ejemplo 2:
+“Hemos jugado mejor que antes y además hemos ganado, que es lo que hay que hacer para no perder. El seleccionador hizo cambios. Los cambios fueron buenos. Cuando los cambios son buenos, el equipo gana. Esto es lo que la experiencia dice y lo que ha pasado hoy.
+
+España no se ha puesto nerviosa. Los nervios son malos porque cuando te pones nervioso haces las cosas mal, y cuando haces las cosas mal, pierdes. Hoy España ha estado tranquila. Hay gente que nunca está tranquila y siempre cree que tiene razón. Esa gente existe y cada vez hay más. Pero hoy la calma ha ganado a los nervios, y eso es bueno.
+
+España es primera del grupo. Ser primero es mejor que ser segundo porque el primero está antes. Uruguay empató, que es peor que ganar. Con un empate ante ellos pasamos primeros y no nos toca Argentina, que es muy buena. Austria, Jordania o Argelia son menos buenas. Jugar contra equipos menos buenos es mejor que jugar contra equipos muy buenos.”
+
+Texto a transformar:
 ${articleText.substring(0, 3000)}`;
 
     const groqResponse = await fetch('https://api.groq.com/openai/v1/chat/completions', {
@@ -71,8 +93,8 @@ ${articleText.substring(0, 3000)}`;
         messages: [
           { role: 'user', content: prompt }
         ],
-        max_tokens: 650,
-        temperature: 0.8
+        max_tokens: 700,
+        temperature: 0.75
       })
     });
 
@@ -83,7 +105,7 @@ ${articleText.substring(0, 3000)}`;
       throw new Error(errorMsg);
     }
 
-    const columnResult = groqData.choices?.[0]?.message?.content || "No se pudo generar el texto.";
+    const columnResult = groqData.choices?.[0]?.message?.content || "No se pudo generar la columna.";
 
     const headers = [
       "Aquí tienes tu texto para que lo entienda todo el mundo, si es que todo el mundo lo puede entender, ¡viva el vino!",
@@ -102,7 +124,7 @@ ${articleText.substring(0, 3000)}`;
   } catch (err) {
     console.error("Error en IA:", err);
     return res.status(500).json({
-      error: `Error al generar el texto: ${err.message}`
+      error: `Error al generar la columna: ${err.message}`
     });
   }
 });
