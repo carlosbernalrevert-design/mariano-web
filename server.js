@@ -47,9 +47,18 @@ app.post('/transformar', async (req, res) => {
     });
   }
 
-  // 2. GENERAR COLUMNA VIA GROQ (Exactamente 3 párrafos, sin titular)
+  // 2. GENERAR COLUMNA VIA GROQ (Estilo Rajoy exagerado, 3 párrafos, 2 refranes, sin titular)
   try {
-    const prompt = `Transforma el siguiente texto en un comentario redactado con el estilo inconfundible de Mariano Rajoy (frases obvias, redundantes, solemnes, redactado de forma sencilla para un niño de 5 años).\n\nInstrucciones estrictas:\n- Genera exactamente 3 párrafos.\n- NO incluyas ningún titular, título ni encabezado al principio.\n- Empieza directamente con el primer párrafo del texto.\n- No menciones el enlace ni la fuente.\n\nTexto:\n${articleText.substring(0, 3000)}`;
+    const prompt = `Imita a Mariano Rajoy de forma caricaturesca, exagerada, solemnísima e ingenua (explicado como para un niño de 5 años pero con tono institucional). Usa abundantes tautologías, trabalenguas absurdos y frases redundantes del tipo "cuanto peor mejor para todos", "un vaso es un vaso", "los españoles son muy españoles y mucho españoles".
+
+Reglas obligatorias e inexcusables:
+1. Redacta EXACTAMENTE 3 párrafos.
+2. NO incluyas ningún titular, título ni encabezado. Empieza directamente el texto.
+3. Debes incluir OBLIGATORIAMENTE DOS refranes o dichos populares tradicionales españoles adaptados o encajados en el texto.
+4. No menciones el enlace ni la fuente.
+
+Texto de la noticia a comentar:
+${articleText.substring(0, 3000)}`;
 
     const groqResponse = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
@@ -62,8 +71,8 @@ app.post('/transformar', async (req, res) => {
         messages: [
           { role: 'user', content: prompt }
         ],
-        max_tokens: 600,
-        temperature: 0.7
+        max_tokens: 650,
+        temperature: 0.8
       })
     });
 
