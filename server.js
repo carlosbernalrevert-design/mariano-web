@@ -45,7 +45,7 @@ app.post('/transformar', async (req, res) => {
     });
   }
 
-  // 2. GENERAR COLUMNA CON LA NUEVA RUTA API DE HUGGING FACE
+  // 2. GENERAR COLUMNA CON MODELO COMPATIBLE (Mistral-7B)
   try {
     const prompt = `Transforma el siguiente texto en una columna escrita con el estilo de Mariano Rajoy (frases obvias, redundantes, solemnes, redactado de forma sencilla para un niño de 5 años). Máximo 4 párrafos e incluye un titular al principio. No menciones el enlace ni la fuente.\n\nTexto:\n${articleText.substring(0, 2000)}`;
 
@@ -56,7 +56,7 @@ app.post('/transformar', async (req, res) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        model: 'Qwen/Qwen2.5-Coder-32B-Instruct',
+        model: 'mistralai/Mistral-7B-Instruct-v0.3',
         messages: [
           { role: 'user', content: prompt }
         ],
