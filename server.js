@@ -22,21 +22,23 @@ app.post('/transformar', async (req, res) => {
   }
 
   try {
+    // 1. Extraer texto del enlace vía Jina AI
     const jinaResponse = await fetch(`https://r.jina.ai/${encodeURIComponent(url)}`, {
       headers: { 'Accept': 'application/json' }
     });
 
     if (!jinaResponse.ok) {
-      throw new Error(`Error al leer el enlace (${jinaResponse.status})`);
+      throw new Error(`No se pudo leer la URL (Status: ${jinaResponse.status})`);
     }
 
     const jinaData = await jinaResponse.json();
     const articleText = jinaData.data?.content || "";
 
     if (!articleText.trim()) {
-      throw new Error("No se pudo extraer texto del enlace introducido.");
+      throw new Error("El enlace no contiene texto extraíble.");
     }
 
+    // 2. Filtro de política
     const lowerText = articleText.toLowerCase();
     if (POLITICS_KEYWORDS.some(word => lowerText.includes(word))) {
       return res.json({
@@ -46,40 +48,37 @@ app.post('/transformar', async (req, res) => {
       });
     }
 
-    const prompt = `
-Tu tarea es transformar el siguiente texto en una columna escrita con el estilo de Mariano Rajoy.
-REGLAS STRICTAS:
-1. La columna debe tener exactamente 4 párrafos.
-2. El tono debe ser infantil‑solemne: frases muy obvias, redundantes y explicaciones de cosas evidentes, con importancia exagerada.
-3. Habla como si fueras un adulto que explica el mundo a un niño de 5 años, creyendo que está diciendo algo muy profundo.
-4. Genera también un titular para la columna en el mismo estilo al principio.
-5. No menciones el artículo original, ni el enlace, ni al autor. Solo genera la columna.
+    // 3. Prompt de transformación
+    const prompt = `Transforma el siguiente texto en una columna al estilo de Mariano Rajoy (frases obvias, redundantes, solemnes, redactado de forma sencilla para un niño de 5 años). Máximo 4 párrafos e incluye un titular. No menciones el enlace ni la fuente.\n\nTexto:\n${articleText.substring(0, 2500)}`;
 
-TEXTO A TRANSFORMACIÓN:
-${articleText.substring(0, 3000)}
-`;
-
-    const hfResponse = await fetch('https://api-inference.huggingface.co/models/meta-llama/Meta-Llama-3-8B-Instruct/v1/chat/completions', {
+    // 4. Llamada a la Inference API de Hugging Face
+    const hfResponse = await fetch('https://api-inference.huggingface.co/models/Qwen/Qwen2.5-Coder-32B-Instruct', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${HF_TOKEN}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        model: 'meta-llama/Meta-Llama-3-8B-Instruct',
-        messages: [{ role: 'user', content: prompt }],
-        max_tokens: 800,
-        temperature: 0.7
+        inputs: prompt,
+        parameters: { max_new_tokens: 500, temperature: 0.7 }
       })
     });
 
     const hfData = await hfResponse.json();
 
     if (!hfResponse.ok) {
-      throw new Error(hfData.error || "Error al conectar con el servicio de Hugging Face.");
+      const errorMsg = hfData.error || (typeof hfData === 'string' ? hfData : JSON.stringify(hfData));
+      throw new Error(`Hugging Face Error: ${errorMsg}`);
     }
 
-    const columnResult = hfData.choices[0].message.content;
+    let columnResult = "";
+    if (Array.isArray(hfData) && hfData[0]?.generated_text) {
+      columnResult = hfData[0].generated_text.replace(prompt, '').trim();
+    } else if (hfData.generated_text) {
+      columnResult = hfData.generated_text.replace(prompt, '').trim();
+    } else {
+      columnResult = typeof hfData === 'string' ? hfData : JSON.stringify(hfData);
+    }
 
     const headers = [
       "Aquí tienes tu texto para que lo entienda todo el mundo, si es que todo el mundo lo puede entender, ¡viva el vino!",
@@ -96,8 +95,9 @@ ${articleText.substring(0, 3000)}
     });
 
   } catch (err) {
+    console.error("Error en servidor:", err);
     return res.status(500).json({
-      error: "Es el vecino el que elige esta app y es esta app la que quiere que sean los vecinos la app. Por favor, inténtalo de nuevo en un momento."
+      error: err.message || "Error al procesar la solicitud."
     });
   }
 });
