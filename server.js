@@ -17,7 +17,7 @@ app.post('/transformar', async (req, res) => {
 
   let articleText = "";
 
-  // PASO 1: Extraer el texto de la URL
+  // 1. EXTRAER TEXTO DE LA NOTICIA
   try {
     const cleanUrl = url.trim().replace(/^https?:\/\//, '');
     const jinaUrl = `https://r.jina.ai/https://${cleanUrl}`;
@@ -25,7 +25,7 @@ app.post('/transformar', async (req, res) => {
     const jinaResponse = await fetch(jinaUrl, {
       method: 'GET',
       headers: {
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)'
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'
       }
     });
 
@@ -36,18 +36,18 @@ app.post('/transformar', async (req, res) => {
     articleText = await jinaResponse.text();
 
     if (!articleText || articleText.length < 50) {
-      throw new Error("No se pudo obtener el texto de la noticia.");
+      throw new Error("No se pudo extraer texto.");
     }
   } catch (err) {
     console.error("Error leyendo URL:", err);
-    return res.status 500).json({
-      error: `Error al leer la noticia (${err.message}). Revisa la URL introducida.`
+    return res.status(500).json({
+      error: `No se pudo acceder a la noticia (${err.message}). Comprueba el enlace.`
     });
   }
 
-  // PASO 2: Enviar a la IA (Hugging Face)
+  // 2. GENERAR COLUMNA CON IA
   try {
-    const prompt = `Transforma el siguiente texto en una columna al estilo de Mariano Rajoy (frases obvias, redundantes, solemnes, redactado de forma sencilla para un niño de 5 años). Máximo 4 párrafos e incluye un titular al principio. No menciones el enlace ni la fuente.\n\nTexto:\n${articleText.substring(0, 2000)}`;
+    const prompt = `Transforma el siguiente texto en una columna escrita con el estilo de Mariano Rajoy (frases obvias, redundantes, solemnes, redactado de forma sencilla para un niño de 5 años). Máximo 4 párrafos e incluye un titular al principio. No menciones el enlace ni la fuente.\n\nTexto:\n${articleText.substring(0, 2000)}`;
 
     const hfResponse = await fetch('https://api-inference.huggingface.co/models/Qwen/Qwen2.5-Coder-32B-Instruct', {
       method: 'POST',
