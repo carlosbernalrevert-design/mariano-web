@@ -16,9 +16,13 @@ app.post('/transformar', async (req, res) => {
   }
 
   try {
-    // 1. Extraer texto del enlace vía Jina AI
+    // 1. Extraer texto del enlace vía Jina AI con User-Agent
     const jinaResponse = await fetch(`https://r.jina.ai/${encodeURIComponent(url)}`, {
-      headers: { 'Accept': 'application/json' }
+      method: 'GET',
+      headers: { 
+        'Accept': 'application/json',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'
+      }
     });
 
     if (!jinaResponse.ok) {
@@ -32,7 +36,7 @@ app.post('/transformar', async (req, res) => {
       throw new Error("El enlace no contiene texto extraíble.");
     }
 
-    // 2. Prompt de transformación (sin filtros)
+    // 2. Prompt de transformación
     const prompt = `Transforma el siguiente texto en una columna al estilo de Mariano Rajoy (frases obvias, redundantes, solemnes, redactado de forma sencilla para un niño de 5 años). Máximo 4 párrafos e incluye un titular al principio. No menciones el enlace ni la fuente.\n\nTexto:\n${articleText.substring(0, 2500)}`;
 
     // 3. Llamada a Hugging Face
@@ -40,7 +44,8 @@ app.post('/transformar', async (req, res) => {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${HF_TOKEN}`,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'
       },
       body: JSON.stringify({
         inputs: prompt,
