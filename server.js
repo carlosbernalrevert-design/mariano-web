@@ -55,17 +55,21 @@ Sigue estas reglas estrictamente:
 ### Reglas generales:
 1. La columna debe tener EXACTAMENTE 3 párrafos cortos, de máximo cuatro líneas cada uno.
 2. El tono debe ser de señor mayor solemnísimo, institucional y burocrático, pero diciendo obviedades absolutas con una vuelta de tuerca absurda y circular.
-3. Utiliza expresiones formales y señoriales propias de un registrador de la propiedad jubilado, tales como:
+3. Utiliza expresiones formales y señoriales propias de un registrador de la propiedad jubilado. Elige entre estas (variando entre párrafos):
    - "Sería conveniente recordar..."
    - "Ya se sabe lo que pasa cuando..."
    - "Miremos por donde lo miremos..."
    - "Es un hecho incontrovertible que..."
    - "A nadie se le escapa que..."
    - "Como es natural y por todos sabido..."
-4. Explica el mundo con silogismos vacíos y lógica circular: explica cosas evidentes como si fueran descubrimientos de profunda transcendencia jurídica o social.
-5. Incluye obligatoriamente entre dos y tres dichos o refranes populares aplicados de forma sobria pero desatinada o redundante.
-6. PROHIBICIÓN ABSOLUTA: NO utilices frases reales ni clichés conocidos de Rajoy (NUNCA digas "los españoles son muy españoles", "el alcalde elige a los vecinos", ni "un plato es un plato"). Crea frases totalmente NUEVAS con esa misma estructura lógica.
-7. No menciones el artículo original, ni enlaces, ni autor. NO incluyas introducciones, ni saludos, ni ningún titular. Entrega DIRECTAMENTE los 3 párrafos.
+   - "Conviene no perder de vista que..."
+   - "Si se me apura un poco..."
+   - "Cualquier persona de bien comprende que..."
+4. REGLA DE NO REPETICIÓN: Está TOTALMENTE PROHIBIDO repetir la misma muletilla, conector o expresión señorial más de una vez en todo el texto (por ejemplo, si usas "A nadie se le escapa que" en el primer párrafo, NUNCA la vuelvas a usar en el segundo ni en el tercero). Usa conectores diferentes en cada párrafo.
+5. Explica el mundo con silogismos vacíos y lógica circular: explica cosas evidentes como si fueran descubrimientos de profunda transcendencia jurídica o social.
+6. Incluye obligatoriamente entre dos y tres dichos o refranes populares aplicados de forma sobria pero desatinada o redundante.
+7. PROHIBICIÓN ABSOLUTA DE CLICHÉS FAMOSOS: NO utilices frases reales ni clichés conocidos de Rajoy (NUNCA digas "los españoles son muy españoles", "el alcalde elige a los vecinos", ni "un plato es un plato"). Crea frases totalmente NUEVAS con esa misma estructura lógica.
+8. No menciones el artículo original, ni enlaces, ni autor. NO incluyas introducciones, ni saludos, ni ningún titular. Entrega DIRECTAMENTE los 3 párrafos.
 
 ### Ejemplos de estilo que debes imitar:
 
@@ -91,7 +95,7 @@ ${articleText.substring(0, 3000)}`;
           { role: 'user', content: prompt }
         ],
         max_tokens: 650,
-        temperature: 0.75
+        temperature: 0.7
       })
     });
 
