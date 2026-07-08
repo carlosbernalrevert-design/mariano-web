@@ -47,34 +47,34 @@ app.post('/transformar', async (req, res) => {
     });
   }
 
-  // 2. GENERAR COLUMNA VIA GROQ SEGÚN LAS NUEVAS REGLAS DE MARIANO
+  // 2. GENERAR COLUMNA VIA GROQ SEGÚN LAS REGLAS DE MARIANO
   try {
-    const prompt = `Tu tarea es transformar un texto en una columna escrita con el estilo de Mariano Rajoy.
+    const prompt = `Tu tarea es transformar un texto en una columna hilarante escrita con el estilo inconfundible de un señor mayor, sobrio y registrador de la propiedad jubilado al estilo de Mariano Rajoy.
 Sigue estas reglas estrictamente:
 
 ### Reglas generales:
 1. La columna debe tener EXACTAMENTE 3 párrafos cortos, de máximo cuatro líneas cada uno.
-2. El tono debe ser infantil‑solemne: frases muy obvias, redundantes y explicaciones de cosas evidentes, con importancia exagerada.
-3. Habla como si fueras un adulto que explica el mundo a un niño de 5 años, creyendo que está diciendo algo muy profundo.
-4. No menciones el artículo original, ni el enlace, ni al autor. Solo genera la columna.
-5. Incluye dos o tres dichos y refranes populares en tus respuestas.
-6. NO hagas introducciones ni explicaciones de ningún tipo. NO redactes ningún titular ni encabezado. Simplemente da el texto como lo diría Rajoy en tres párrafos.
+2. El tono debe ser de señor mayor solemnísimo, institucional y burocrático, pero diciendo obviedades absolutas con una vuelta de tuerca absurda y circular.
+3. Utiliza expresiones formales y señoriales propias de un registrador de la propiedad jubilado, tales como:
+   - "Sería conveniente recordar..."
+   - "Ya se sabe lo que pasa cuando..."
+   - "Miremos por donde lo miremos..."
+   - "Es un hecho incontrovertible que..."
+   - "A nadie se le escapa que..."
+   - "Como es natural y por todos sabido..."
+4. Explica el mundo con silogismos vacíos y lógica circular: explica cosas evidentes como si fueran descubrimientos de profunda transcendencia jurídica o social.
+5. Incluye obligatoriamente entre dos y tres dichos o refranes populares aplicados de forma sobria pero desatinada o redundante.
+6. PROHIBICIÓN ABSOLUTA: NO utilices frases reales ni clichés conocidos de Rajoy (NUNCA digas "los españoles son muy españoles", "el alcalde elige a los vecinos", ni "un plato es un plato"). Crea frases totalmente NUEVAS con esa misma estructura lógica.
+7. No menciones el artículo original, ni enlaces, ni autor. NO incluyas introducciones, ni saludos, ni ningún titular. Entrega DIRECTAMENTE los 3 párrafos.
 
 ### Ejemplos de estilo que debes imitar:
 
 Ejemplo 1:
-“Estamos en cuartos de final. Eso significa que hemos ganado partidos antes, porque si no, no estaríamos aquí. Portugal es un equipo muy bueno, mejor que los malos. Ganaron la Eurocopa, que es un torneo de fútbol pero de Europa, y la Liga de las Naciones dos veces. Dos es más que uno.
+“Miremos por donde lo miremos, cuando un expediente entra por la puerta, la puerta deja de estar vacía porque en ella se encuentra el expediente. Sería conveniente recordar que las cosas que están puestas en un sitio no están en otro, a menos que se trasladen, en cuyo caso cambian de lugar. Quien mucho abarca poco aprieta, pero el que no abarca nada, se queda con las manos completamente libres.
 
-No sé lo que va a pasar en cuartos, porque el futuro todavía no ha pasado. Sin embargo, sí sé que España va a ganar. Puede parecer contradictorio pero no lo es. En Estados Unidos juegan al fútbol americano, que se llama fútbol pero no lo es. No es serio. Y Bélgica tiene a Courtois, que para goles, pero si no le tiramos no tiene nada que parar.
+Es un hecho incontrovertible que el día tiene sus horas y la noche tiene las suyas, lo cual permite que la gente duerma cuando no está despierta. Ya se sabe lo que pasa si se intenta cenar al mismo tiempo que se almuerza: que una de las dos comidas sobra. A buen hambre no hay pan duro, salvo que el pan sea de piedra, en cuyo caso resulta impracticable para la dentadura.
 
-Nadie nos ha marcado todavía. Cero es un número muy bueno cuando es en contra. Otra cosa sería si fuera a favor. Luego vendrá Francia, pero eso es mañana y hoy es hoy. Enhorabuena a todos, incluidos los que animamos desde casa. No metemos goles, pero contamos. Aunque menos que los jugadores, claro.”
-
-Ejemplo 2:
-“Hemos jugado mejor que antes y además hemos ganado, que es lo que hay que hacer para no perder. El seleccionador hizo cambios. Los cambios fueron buenos. Cuando los cambios son buenos, el equipo gana. Esto es lo que la experiencia dice y lo que ha pasado hoy.
-
-España no se ha puesto nerviosa. Los nervios son malos porque cuando te pones nervioso haces las cosas mal, y cuando haces las cosas mal, pierdes. Hoy España ha estado tranquila. Hay gente que nunca está tranquila y siempre cree que tiene razón. Esa gente existe y cada vez hay más. Pero hoy la calma ha ganado a los nervios, y eso es bueno.
-
-España es primera del grupo. Ser primero es mejor que ser segundo porque el primero está antes. Uruguay empató, que es peor que ganar. Con un empate ante ellos pasamos primeros y no nos toca Argentina, que es muy buena. Austria, Jordania o Argelia son menos buenas. Jugar contra equipos menos buenos es mejor que jugar contra equipos muy buenos.”
+A nadie se le escapa que el futuro tiene la particularidad de que viene después, mientras que el pasado se caracteriza por haber ocurrido previamente. Como es natural y por todos sabido, si se decide no avanzar, uno se queda exactamente donde estaba al principio. Más vale pájaro en mano que ciento volando, salvo que se prefiera el vuelo de las aves desde la distancia.”
 
 Texto a transformar:
 ${articleText.substring(0, 3000)}`;
@@ -104,6 +104,7 @@ ${articleText.substring(0, 3000)}`;
 
     const columnResult = groqData.choices?.[0]?.message?.content || "No se pudo generar la columna.";
 
+    // Encabezados aleatorios manteniendo "¡viva el vino!"
     const headers = [
       "Aquí tienes tu texto para que lo entienda todo el mundo, si es que todo el mundo lo puede entender, ¡viva el vino!",
       "Lo que está claro es que está claro, y el que no lo entienda es porque no lo ve, ¡viva el vino!",
