@@ -1,53 +1,320 @@
-<!-- Caricatura reconocible de Mariano Rajoy -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>rIAjoy - MarIAno</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-color: #F8FAFC;
+      --primary: #1E3A8A;
+      --accent-blue: #2563EB;
+      --card-bg: #FFFFFF;
+      --text-main: #1E293B;
+      --text-muted: #64748B;
+      --border-color: #E2E8F0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 24px;
+    }
+
+    .container {
+      background: var(--card-bg);
+      max-width: 680px;
+      width: 100%;
+      border-radius: 16px;
+      padding: 48px 40px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+      border: 1px solid var(--border-color);
+      text-align: center;
+      position: relative;
+    }
+
+    /* Detalle elegante superior */
+    .container::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: var(--primary);
+      border-top-left-radius: 16px;
+      border-top-right-radius: 16px;
+    }
+
+    /* Tamaño controlado del SVG */
+    .rajoy-avatar {
+      width: 140px;
+      height: 140px;
+      max-width: 140px;
+      max-height: 140px;
+      margin: 0 auto 12px auto;
+      display: block;
+    }
+
+    .brand-title {
+      font-family: 'Merriweather', serif;
+      font-weight: 900;
+      font-size: 26px;
+      color: var(--primary);
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-family: 'Merriweather', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.4;
+      margin-bottom: 16px;
+    }
+
+    .subtitle {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 32px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    input[type="url"] {
+      width: 100%;
+      padding: 16px 20px;
+      font-size: 15px;
+      font-family: 'Open Sans', sans-serif;
+      border: 1px solid #CBD5E1;
+      border-radius: 10px;
+      outline: none;
+      transition: all 0.2s ease;
+      background-color: #FFFFFF;
+      color: var(--text-main);
+    }
+
+    input[type="url"]:focus {
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    }
+
+    .btn-submit {
+      width: 100%;
+      background-color: var(--primary);
+      color: #FFFFFF;
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      padding: 16px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.1s ease;
+    }
+
+    .btn-submit:hover {
+      background-color: #1D4ED8;
+    }
+
+    .btn-submit:disabled {
+      background-color: #475569;
+      cursor: not-allowed;
+    }
+
+    /* Animación de parpadeo suave cuando carga */
+    .btn-submit.loading {
+      animation: pulseText 1.2s infinite ease-in-out;
+    }
+
+    @keyframes pulseText {
+      0% { opacity: 1; }
+      50% { opacity: 0.4; }
+      100% { opacity: 1; }
+    }
+
+    /* Caja de resultados */
+    .result-box {
+      margin-top: 32px;
+      text-align: left;
+      display: none;
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 28px;
+    }
+
+    .result-header {
+      font-family: 'Merriweather', serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #E2E8F0;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .result-content {
+      font-family: 'Merriweather', serif;
+      font-size: 16px;
+      line-height: 1.8;
+      color: #334155;
+      white-space: pre-wrap;
+    }
+
+    .error-box {
+      margin-top: 24px;
+      padding: 16px;
+      background-color: #FEF2F2;
+      border: 1px solid #FECACA;
+      color: #991B1B;
+      border-radius: 10px;
+      display: none;
+      font-size: 14px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- Caricatura de Mariano Rajoy con puro -->
     <svg class="rajoy-avatar" viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- Fondo/Cabeza -->
       <ellipse cx="70" cy="58" rx="32" ry="36" fill="#FDE68A" stroke="#1E293B" stroke-width="2.5"/>
-      
-      <!-- Pelo gris/canoso con peinado lateral característico -->
       <path d="M 38 52 C 36 28, 50 18, 70 18 C 90 18, 104 28, 102 52 C 96 30, 72 24, 38 52 Z" fill="#94A3B8" stroke="#1E293B" stroke-width="2.5"/>
       <path d="M 40 42 C 55 26, 85 26, 100 42" stroke="#E2E8F0" stroke-width="2" fill="none"/>
 
-      <!-- Cejas oscuras e inquisitivas -->
       <path d="M 48 42 Q 56 38 62 43" stroke="#334155" stroke-width="3" stroke-linecap="round" fill="none"/>
       <path d="M 78 43 Q 84 38 92 42" stroke="#334155" stroke-width="3" stroke-linecap="round" fill="none"/>
 
-      <!-- Ojos con párpados entornados (mirada Rajoy) -->
       <ellipse cx="55" cy="48" rx="4" ry="2.5" fill="#1E293B"/>
       <ellipse cx="85" cy="48" rx="4" ry="2.5" fill="#1E293B"/>
       <path d="M 50 46 Q 55 44 60 46" stroke="#1E293B" stroke-width="1.5" fill="none"/>
       <path d="M 80 46 Q 85 44 90 46" stroke="#1E293B" stroke-width="1.5" fill="none"/>
 
-      <!-- Gafas de pasta oscuras bien definidas -->
       <rect x="42" y="42" width="24" height="15" rx="3" stroke="#0F172A" stroke-width="3" fill="none"/>
       <rect x="74" y="42" width="24" height="15" rx="3" stroke="#0F172A" stroke-width="3" fill="none"/>
       <line x1="66" y1="48" x2="74" y2="48" stroke="#0F172A" stroke-width="3"/>
       <line x1="36" y1="46" x2="42" y2="46" stroke="#0F172A" stroke-width="2.5"/>
       <line x1="98" y1="46" x2="104" y2="46" stroke="#0F172A" stroke-width="2.5"/>
 
-      <!-- Nariz prominente -->
       <path d="M 70 48 L 65 62 L 73 62" stroke="#1E293B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
 
-      <!-- Barba canosa (forma característica de perilla/barba Rajoy) -->
       <path d="M 42 64 C 42 88, 98 88, 98 64 C 92 82, 48 82, 42 64 Z" fill="#CBD5E1" stroke="#1E293B" stroke-width="2"/>
       <path d="M 52 70 Q 70 88 88 70 Q 70 94 52 70 Z" fill="#64748B" opacity="0.4"/>
 
-      <!-- Boca / Sonrisa leve -->
       <path d="M 58 69 Q 70 73 82 69" stroke="#1E293B" stroke-width="2" stroke-linecap="round" fill="none"/>
 
-      <!-- PURO con humo -->
       <g id="puro">
         <rect x="76" y="67" width="30" height="7" rx="2" fill="#78350F" stroke="#1E293B" stroke-width="1.5" transform="rotate(-10 76 67)"/>
         <rect x="82" y="66" width="4" height="7.5" fill="#F59E0B" transform="rotate(-10 82 66)"/>
         <ellipse cx="106" cy="61" rx="2" ry="3.5" fill="#EF4444"/>
-        <!-- Humo subiendo -->
         <path d="M 107 58 Q 112 48 108 42 T 114 30" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.7"/>
       </g>
 
-      <!-- Traje azul y corbata -->
       <path d="M 26 110 C 35 88, 105 88, 114 110" stroke="#1E293B" stroke-width="2.5" fill="#1E3A8A"/>
-      <!-- Camisa blanca -->
       <polygon points="70,90 58,110 82,110" fill="#FFFFFF"/>
-      <!-- Corbata azul marino -->
       <polygon points="70,92 65,110 75,110" fill="#0F172A" stroke="#1E293B" stroke-width="1"/>
       <path d="M 52 90 L 70 90 L 88 90" stroke="#FFFFFF" stroke-width="2.5"/>
     </svg>
+
+    <div class="brand-title">MarIAno</div>
+    <h1>La herramienta que aclara lo que ya estaba claro, y que además lo vuelve a aclarar por si fuera necesario, o no.</h1>
+    
+    <p class="subtitle">Trae un link cualquiera y <i>MarIAno</i> te convierte la información en una columna que entendería un niño de 5 años.</p>
+
+    <form id="marIAnoForm">
+      <div class="form-group">
+        <input 
+          type="url" 
+          id="newsUrl" 
+          placeholder="Pega el link de tu noticia para MarIAnizar" 
+          required 
+          autocomplete="off"
+        />
+      </div>
+      <button type="submit" id="submitBtn" class="btn-submit">MarlAnizar</button>
+    </form>
+
+    <div id="errorBox" class="error-box"></div>
+
+    <div id="resultBox" class="result-box">
+      <div id="resultHeader" class="result-header"></div>
+      <div id="resultContent" class="result-content"></div>
+    </div>
+
+  </div>
+
+  <script>
+    const form = document.getElementById('marIAnoForm');
+    const input = document.getElementById('newsUrl');
+    const submitBtn = document.getElementById('submitBtn');
+    const resultBox = document.getElementById('resultBox');
+    const resultHeader = document.getElementById('resultHeader');
+    const resultContent = document.getElementById('resultContent');
+    const errorBox = document.getElementById('errorBox');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const url = input.value.trim();
+      if (!url) return;
+
+      // Reset de estados y animación de espera
+      errorBox.style.display = 'none';
+      resultBox.style.display = 'none';
+      submitBtn.disabled = true;
+      submitBtn.classList.add('loading');
+      submitBtn.textContent = 'pensando en obviedades...';
+
+      try {
+        const response = await fetch('/transformar', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ url })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || 'Ocurrió un error inesperado.');
+        }
+
+        resultHeader.textContent = data.header || '';
+        resultContent.textContent = data.content || '';
+        resultBox.style.display = 'block';
+
+      } catch (err) {
+        errorBox.textContent = err.message;
+        errorBox.style.display = 'block';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('loading');
+        submitBtn.textContent = 'MarlAnizar';
+      }
+    });
+  </script>
+</body>
+</html>
