@@ -15,37 +15,45 @@ app.post('/transformar', async (req, res) => {
     return res.status(400).json({ error: "Por favor, introduce una URL válida." });
   }
 
+  let articleText = "";
+
+  // PASO 1: Extraer el texto de la URL
   try {
-    // 1. Extraer texto del enlace vía Jina AI con User-Agent
-    const jinaResponse = await fetch(`https://r.jina.ai/${encodeURIComponent(url)}`, {
+    const cleanUrl = url.trim().replace(/^https?:\/\//, '');
+    const jinaUrl = `https://r.jina.ai/https://${cleanUrl}`;
+
+    const jinaResponse = await fetch(jinaUrl, {
       method: 'GET',
-      headers: { 
-        'Accept': 'application/json',
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)'
       }
     });
 
     if (!jinaResponse.ok) {
-      throw new Error(`No se pudo leer la URL (Status: ${jinaResponse.status})`);
+      throw new Error(`Estado ${jinaResponse.status}`);
     }
 
-    const jinaData = await jinaResponse.json();
-    const articleText = jinaData.data?.content || "";
+    articleText = await jinaResponse.text();
 
-    if (!articleText.trim()) {
-      throw new Error("El enlace no contiene texto extraíble.");
+    if (!articleText || articleText.length < 50) {
+      throw new Error("No se pudo obtener el texto de la noticia.");
     }
+  } catch (err) {
+    console.error("Error leyendo URL:", err);
+    return res.status 500).json({
+      error: `Error al leer la noticia (${err.message}). Revisa la URL introducida.`
+    });
+  }
 
-    // 2. Prompt de transformación
-    const prompt = `Transforma el siguiente texto en una columna al estilo de Mariano Rajoy (frases obvias, redundantes, solemnes, redactado de forma sencilla para un niño de 5 años). Máximo 4 párrafos e incluye un titular al principio. No menciones el enlace ni la fuente.\n\nTexto:\n${articleText.substring(0, 2500)}`;
+  // PASO 2: Enviar a la IA (Hugging Face)
+  try {
+    const prompt = `Transforma el siguiente texto en una columna al estilo de Mariano Rajoy (frases obvias, redundantes, solemnes, redactado de forma sencilla para un niño de 5 años). Máximo 4 párrafos e incluye un titular al principio. No menciones el enlace ni la fuente.\n\nTexto:\n${articleText.substring(0, 2000)}`;
 
-    // 3. Llamada a Hugging Face
     const hfResponse = await fetch('https://api-inference.huggingface.co/models/Qwen/Qwen2.5-Coder-32B-Instruct', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${HF_TOKEN}`,
-        'Content-Type': 'application/json',
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         inputs: prompt,
@@ -56,8 +64,8 @@ app.post('/transformar', async (req, res) => {
     const hfData = await hfResponse.json();
 
     if (!hfResponse.ok) {
-      const errorMsg = hfData.error || (typeof hfData === 'string' ? hfData : JSON.stringify(hfData));
-      throw new Error(`Hugging Face Error: ${errorMsg}`);
+      const errorMsg = hfData.error || JSON.stringify(hfData);
+      throw new Error(errorMsg);
     }
 
     let columnResult = "";
@@ -84,9 +92,9 @@ app.post('/transformar', async (req, res) => {
     });
 
   } catch (err) {
-    console.error("Error en servidor:", err);
+    console.error("Error en IA:", err);
     return res.status(500).json({
-      error: err.message || "Error al procesar la solicitud."
+      error: `Error al generar la columna: ${err.message}`
     });
   }
 });
