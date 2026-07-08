@@ -45,7 +45,7 @@ app.post('/transformar', async (req, res) => {
     });
   }
 
-  // 2. GENERAR COLUMNA CON MODELO COMPATIBLE (Mistral-7B)
+  // 2. GENERAR COLUMNA CON LLAMA 3.1 (100% COMPATIBLE Y GRATUITO)
   try {
     const prompt = `Transforma el siguiente texto en una columna escrita con el estilo de Mariano Rajoy (frases obvias, redundantes, solemnes, redactado de forma sencilla para un niño de 5 años). Máximo 4 párrafos e incluye un titular al principio. No menciones el enlace ni la fuente.\n\nTexto:\n${articleText.substring(0, 2000)}`;
 
@@ -56,7 +56,7 @@ app.post('/transformar', async (req, res) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        model: 'mistralai/Mistral-7B-Instruct-v0.3',
+        model: 'meta-llama/Meta-Llama-3.1-8B-Instruct',
         messages: [
           { role: 'user', content: prompt }
         ],
