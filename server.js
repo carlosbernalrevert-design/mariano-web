@@ -3,7 +3,9 @@ const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const HF_TOKEN = process.env.HF_TOKEN;
+
+// Lee la API Key de Groq (o usa HF_TOKEN si pegaste ahí la clave de Groq)
+const GROQ_API_KEY = process.env.GROQ_API_KEY || process.env.HF_TOKEN;
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -45,34 +47,34 @@ app.post('/transformar', async (req, res) => {
     });
   }
 
-  // 2. GENERAR COLUMNA CON LLAMA 3.1 (100% COMPATIBLE Y GRATUITO)
+  // 2. GENERAR COLUMNA VIA GROQ (LLAMA 3.3 70B - GRATIS Y ULTRARRÁPIDO)
   try {
-    const prompt = `Transforma el siguiente texto en una columna escrita con el estilo de Mariano Rajoy (frases obvias, redundantes, solemnes, redactado de forma sencilla para un niño de 5 años). Máximo 4 párrafos e incluye un titular al principio. No menciones el enlace ni la fuente.\n\nTexto:\n${articleText.substring(0, 2000)}`;
+    const prompt = `Transforma el siguiente texto en una columna escrita con el estilo de Mariano Rajoy (frases obvias, redundantes, solemnes, redactado de forma sencilla para un niño de 5 años). Máximo 4 párrafos e incluye un titular al principio. No menciones el enlace ni la fuente.\n\nTexto:\n${articleText.substring(0, 3000)}`;
 
-    const hfResponse = await fetch('https://router.huggingface.co/hf-inference/v1/chat/completions', {
+    const groqResponse = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${HF_TOKEN}`,
+        'Authorization': `Bearer ${GROQ_API_KEY}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        model: 'meta-llama/Meta-Llama-3.1-8B-Instruct',
+        model: 'llama-3.3-70b-versatile',
         messages: [
           { role: 'user', content: prompt }
         ],
-        max_tokens: 500,
+        max_tokens: 600,
         temperature: 0.7
       })
     });
 
-    const hfData = await hfResponse.json();
+    const groqData = await groqResponse.json();
 
-    if (!hfResponse.ok) {
-      const errorMsg = hfData.error || hfData.message || JSON.stringify(hfData);
+    if (!groqResponse.ok) {
+      const errorMsg = groqData.error?.message || JSON.stringify(groqData);
       throw new Error(errorMsg);
     }
 
-    const columnResult = hfData.choices?.[0]?.message?.content || "No se pudo generar la respuesta.";
+    const columnResult = groqData.choices?.[0]?.message?.content || "No se pudo generar la columna.";
 
     const headers = [
       "Aquí tienes tu texto para que lo entienda todo el mundo, si es que todo el mundo lo puede entender, ¡viva el vino!",
