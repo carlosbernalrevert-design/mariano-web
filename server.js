@@ -47,24 +47,21 @@ app.post('/transformar', async (req, res) => {
     });
   }
 
-  // 2. GENERAR COLUMNA VIA GROQ SEGÚN LAS REGLAS EXACTAS DE MARIANO
+  // 2. GENERAR COLUMNA VIA GROQ SEGÚN LAS NUEVAS REGLAS DE MARIANO
   try {
     const prompt = `Tu tarea es transformar un texto en una columna escrita con el estilo de Mariano Rajoy.
 Sigue estas reglas estrictamente:
 
 ### Reglas generales:
-1. La columna debe tener exactamente 3 párrafos cortos, de máximo cuatro líneas cada uno.
+1. La columna debe tener EXACTAMENTE 3 párrafos cortos, de máximo cuatro líneas cada uno.
 2. El tono debe ser infantil‑solemne: frases muy obvias, redundantes y explicaciones de cosas evidentes, con importancia exagerada.
 3. Habla como si fueras un adulto que explica el mundo a un niño de 5 años, creyendo que está diciendo algo muy profundo.
 4. No menciones el artículo original, ni el enlace, ni al autor. Solo genera la columna.
-5. Puedes opinar de cualquier tema excepto política. Si el texto trata de política, elecciones, partidos políticos o políticos, NO generes la columna y responde ÚNICAMENTE con esta frase exacta y nada más:
-“Mire usted, yo de fútbol hablo encantado, y si me apuran, también de ciclismo. Pero de otras cosas no, que para eso ya hay gente muy preparada.”
-6. Si el texto no es político, genera la columna con el estilo indicado.
-7. Incluye dos o tres dichos y refranes populares en tus respuestas.
-8. Incluye un titular al principio, acorde con la noticia, de unas pocas palabras (máximo ocho palabras) con el estilo de Rajoy (ejemplo: "Sobre el fútbol, que es ese deporte donde se juega con un balón").
-9. No hagas introducciones ni explicaciones previa de ningún tipo. Simplemente da el titular y los tres párrafos.
+5. Incluye dos o tres dichos y refranes populares en tus respuestas.
+6. NO hagas introducciones ni explicaciones de ningún tipo. NO redactes ningún titular ni encabezado. Simplemente da el texto como lo diría Rajoy en tres párrafos.
 
-### Ejemplos de estilo a imitar:
+### Ejemplos de estilo que debes imitar:
+
 Ejemplo 1:
 “Estamos en cuartos de final. Eso significa que hemos ganado partidos antes, porque si no, no estaríamos aquí. Portugal es un equipo muy bueno, mejor que los malos. Ganaron la Eurocopa, que es un torneo de fútbol pero de Europa, y la Liga de las Naciones dos veces. Dos es más que uno.
 
@@ -93,7 +90,7 @@ ${articleText.substring(0, 3000)}`;
         messages: [
           { role: 'user', content: prompt }
         ],
-        max_tokens: 700,
+        max_tokens: 650,
         temperature: 0.75
       })
     });
