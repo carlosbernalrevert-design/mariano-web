@@ -197,24 +197,21 @@
 
   <div class="container">
     
-    <!-- Caricatura hiperrealista en vector de la foto Captura de pantalla 2026-07-09 a las 11.02.24.png -->
+    <!-- Caricatura hiperrealista basada en Captura de pantalla 2026-07-09 a las 11.02.24.png -->
     <svg class="rajoy-avatar" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <!-- Gradientes para la montura metálica -->
         <linearGradient id="metalFrame" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stop-color="#475569"/>
           <stop offset="50%" stop-color="#0F172A"/>
           <stop offset="100%" stop-color="#334155"/>
         </linearGradient>
 
-        <!-- Gradiente de reflejo de cristal -->
         <linearGradient id="glassReflect" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.5"/>
           <stop offset="30%" stop-color="#38BDF8" stop-opacity="0.15"/>
           <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
         </linearGradient>
 
-        <!-- Gradientes para la profundidad de la barba -->
         <radialGradient id="beardBase" cx="50%" cy="50%" r="50%">
           <stop offset="0%" stop-color="#FFFFFF"/>
           <stop offset="70%" stop-color="#F1F5F9"/>
@@ -229,13 +226,9 @@
 
       <!-- BARBA Y BIGOTE REALISTAS -->
       <g id="barba-hiperrealista">
-        <!-- Base sombreada de barbilla y mandíbula -->
         <path d="M 40 85 C 36 138, 60 182, 100 182 C 140 182, 164 138, 160 85 C 144 112, 132 138, 100 138 C 68 138, 56 112, 40 85 Z" fill="url(#beardShadow)"/>
-        
-        <!-- Masa principal de la barba con volumen -->
         <path d="M 44 88 C 41 135, 62 178, 100 178 C 138 178, 159 135, 156 88 C 142 112, 130 135, 100 135 C 70 135, 58 112, 44 88 Z" fill="url(#beardBase)"/>
 
-        <!-- Filamentos y matices de canas (Líneas orgánicas finas) -->
         <g stroke="#94A3B8" stroke-width="1" opacity="0.6" stroke-linecap="round">
           <path d="M 52 105 C 50 128, 64 150, 80 162"/>
           <path d="M 148 105 C 150 128, 136 150, 120 162"/>
@@ -245,41 +238,30 @@
           <path d="M 128 135 C 120 152, 110 160, 100 162"/>
         </g>
 
-        <!-- Bigote detallado con corte anatómico -->
         <path d="M 66 100 C 82 95, 118 95, 134 100 C 128 114, 72 114, 66 100 Z" fill="url(#beardBase)" stroke="#CBD5E1" stroke-width="1"/>
         <path d="M 70 100 Q 100 97 130 100 C 124 108, 76 108, 70 100 Z" fill="#FFFFFF"/>
-        
-        <!-- Textura superior del bigote -->
         <path d="M 74 100 Q 100 105 126 100" stroke="#64748B" stroke-width="1.2" stroke-dasharray="2 2" opacity="0.5"/>
       </g>
 
-      <!-- GAFAS METÁLICAS CON VOLUMEN Y CRISTALES -->
+      <!-- GAFAS METÁLICAS -->
       <g id="gafas-hiperrealistas">
-        <!-- Sombras proyectadas de las gafas -->
         <rect x="36" y="58" width="48" height="28" rx="7" fill="#0F172A" opacity="0.12"/>
         <rect x="116" y="58" width="48" height="28" rx="7" fill="#0F172A" opacity="0.12"/>
 
-        <!-- Cristal izquierdo con reflejo -->
         <rect x="36" y="56" width="48" height="28" rx="7" fill="url(#glassReflect)"/>
-        <!-- Montura izquierda -->
         <rect x="36" y="56" width="48" height="28" rx="7" stroke="url(#metalFrame)" stroke-width="3" fill="none"/>
 
-        <!-- Cristal derecho con reflejo -->
         <rect x="116" y="56" width="48" height="28" rx="7" fill="url(#glassReflect)"/>
-        <!-- Montura derecha -->
         <rect x="116" y="56" width="48" height="28" rx="7" stroke="url(#metalFrame)" stroke-width="3" fill="none"/>
 
-        <!-- Puente nasal doble realista -->
         <path d="M 84 63 Q 100 60 116 63" stroke="url(#metalFrame)" stroke-width="2.8" fill="none"/>
         <path d="M 86 67 Q 100 65 114 67" stroke="#94A3B8" stroke-width="1.5" fill="none"/>
 
-        <!-- Patillas laterales articuladas -->
         <path d="M 16 62 L 36 62" stroke="url(#metalFrame)" stroke-width="3" stroke-linecap="round"/>
         <path d="M 164 62 L 184 62" stroke="url(#metalFrame)" stroke-width="3" stroke-linecap="round"/>
         <circle cx="36" cy="62" r="2" fill="#64748B"/>
         <circle cx="164" cy="62" r="2" fill="#64748B"/>
 
-        <!-- Destellos de luz diagonal sobre los cristales -->
         <path d="M 42 58 L 62 82" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
         <path d="M 122 58 L 142 82" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
       </g>
@@ -288,7 +270,7 @@
     <div class="brand-title">MarIAno</div>
     <h1>La herramienta que aclara lo que ya estaba claro, y que además lo vuelve a aclarar por si fuera necesario.</h1>
     
-    <p class="subtitle">Trae un link cualquiera y MarIAno te explica la información para que la entiendas mejor, o no.</p>
+    <p class="subtitle">Trae una noticia cualquiera y MarIAno te la explica para que la entiendas mejor, o no.</p>
 
     <form id="marIAnoForm">
       <div class="form-group">
