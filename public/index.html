@@ -61,12 +61,13 @@
     }
 
     .rajoy-avatar {
-      width: 160px;
-      height: 160px;
-      max-width: 160px;
-      max-height: 160px;
+      width: 170px;
+      height: 170px;
+      max-width: 170px;
+      max-height: 170px;
       margin: 0 auto 12px auto;
       display: block;
+      filter: drop-shadow(0px 4px 6px rgba(15, 23, 42, 0.08));
     }
 
     .brand-title {
@@ -196,41 +197,91 @@
 
   <div class="container">
     
-    <!-- Caricatura realista basada en Captura de pantalla 2026-07-09 a las 10.47.37.jpg -->
+    <!-- Caricatura hiperrealista en vector de la foto Captura de pantalla 2026-07-09 a las 11.02.24.png -->
     <svg class="rajoy-avatar" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- Gafas metálicas estilizadas según la foto -->
-      <g id="gafas-realistas">
-        <!-- Lente izquierda -->
-        <rect x="38" y="58" width="46" height="26" rx="6" stroke="#1E293B" stroke-width="2.8" fill="none"/>
-        <!-- Lente derecha -->
-        <rect x="116" y="58" width="46" height="26" rx="6" stroke="#1E293B" stroke-width="2.8" fill="none"/>
-        <!-- Puente nasal doble -->
-        <path d="M 84 65 Q 100 62 116 65" stroke="#1E293B" stroke-width="2.5" fill="none"/>
-        <path d="M 86 69 Q 100 67 114 69" stroke="#475569" stroke-width="1.8" fill="none"/>
-        <!-- Patillas y Bisagras -->
-        <path d="M 18 64 L 38 64" stroke="#1E293B" stroke-width="2.5"/>
-        <path d="M 162 64 L 182 64" stroke="#1E293B" stroke-width="2.5"/>
-        <!-- Reflejo suave en cristales -->
-        <line x1="44" y1="62" x2="58" y2="78" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
-        <line x1="122" y1="62" x2="136" y2="78" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+      <defs>
+        <!-- Gradientes para la montura metálica -->
+        <linearGradient id="metalFrame" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#475569"/>
+          <stop offset="50%" stop-color="#0F172A"/>
+          <stop offset="100%" stop-color="#334155"/>
+        </linearGradient>
+
+        <!-- Gradiente de reflejo de cristal -->
+        <linearGradient id="glassReflect" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.5"/>
+          <stop offset="30%" stop-color="#38BDF8" stop-opacity="0.15"/>
+          <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+        </linearGradient>
+
+        <!-- Gradientes para la profundidad de la barba -->
+        <radialGradient id="beardBase" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#FFFFFF"/>
+          <stop offset="70%" stop-color="#F1F5F9"/>
+          <stop offset="100%" stop-color="#CBD5E1"/>
+        </radialGradient>
+
+        <linearGradient id="beardShadow" x1="50%" y1="0%" x2="50%" y2="100%">
+          <stop offset="0%" stop-color="#94A3B8" stop-opacity="0.4"/>
+          <stop offset="100%" stop-color="#475569" stop-opacity="0.1"/>
+        </linearGradient>
+      </defs>
+
+      <!-- BARBA Y BIGOTE REALISTAS -->
+      <g id="barba-hiperrealista">
+        <!-- Base sombreada de barbilla y mandíbula -->
+        <path d="M 40 85 C 36 138, 60 182, 100 182 C 140 182, 164 138, 160 85 C 144 112, 132 138, 100 138 C 68 138, 56 112, 40 85 Z" fill="url(#beardShadow)"/>
+        
+        <!-- Masa principal de la barba con volumen -->
+        <path d="M 44 88 C 41 135, 62 178, 100 178 C 138 178, 159 135, 156 88 C 142 112, 130 135, 100 135 C 70 135, 58 112, 44 88 Z" fill="url(#beardBase)"/>
+
+        <!-- Filamentos y matices de canas (Líneas orgánicas finas) -->
+        <g stroke="#94A3B8" stroke-width="1" opacity="0.6" stroke-linecap="round">
+          <path d="M 52 105 C 50 128, 64 150, 80 162"/>
+          <path d="M 148 105 C 150 128, 136 150, 120 162"/>
+          <path d="M 60 120 C 62 142, 78 162, 100 168"/>
+          <path d="M 140 120 C 138 142, 122 162, 100 168"/>
+          <path d="M 72 135 C 80 152, 90 160, 100 162"/>
+          <path d="M 128 135 C 120 152, 110 160, 100 162"/>
+        </g>
+
+        <!-- Bigote detallado con corte anatómico -->
+        <path d="M 66 100 C 82 95, 118 95, 134 100 C 128 114, 72 114, 66 100 Z" fill="url(#beardBase)" stroke="#CBD5E1" stroke-width="1"/>
+        <path d="M 70 100 Q 100 97 130 100 C 124 108, 76 108, 70 100 Z" fill="#FFFFFF"/>
+        
+        <!-- Textura superior del bigote -->
+        <path d="M 74 100 Q 100 105 126 100" stroke="#64748B" stroke-width="1.2" stroke-dasharray="2 2" opacity="0.5"/>
       </g>
 
-      <!-- Barba canosa detallada basada en la sonrisa de la foto -->
-      <g id="barba-realista">
-        <!-- Bigote recortado característico -->
-        <path d="M 68 102 C 82 98, 118 98, 132 102 C 126 114, 74 114, 68 102 Z" fill="#E2E8F0" stroke="#64748B" stroke-width="1.5"/>
-        <path d="M 74 102 C 86 100, 114 100, 126 102 C 120 110, 80 110, 74 102 Z" fill="#FFFFFF"/>
+      <!-- GAFAS METÁLICAS CON VOLUMEN Y CRISTALES -->
+      <g id="gafas-hiperrealistas">
+        <!-- Sombras proyectadas de las gafas -->
+        <rect x="36" y="58" width="48" height="28" rx="7" fill="#0F172A" opacity="0.12"/>
+        <rect x="116" y="58" width="48" height="28" rx="7" fill="#0F172A" opacity="0.12"/>
 
-        <!-- Masa principal de la barba -->
-        <path d="M 44 88 C 40 135, 62 178, 100 178 C 138 178, 160 135, 156 88 C 142 112, 132 136, 100 136 C 68 136, 58 112, 44 88 Z" fill="#F8FAFC" stroke="#94A3B8" stroke-width="2"/>
-        
-        <!-- Sombra de barbilla y tonos canosos laterales -->
-        <path d="M 52 108 C 48 138, 70 170, 100 170 C 130 170, 152 138, 148 108 C 136 128, 122 146, 100 146 C 78 146, 64 128, 52 108 Z" fill="#E2E8F0"/>
-        <path d="M 68 126 C 64 148, 80 162, 100 162 C 120 162, 136 148, 132 126 C 124 140, 112 150, 100 150 C 88 150, 76 140, 68 126 Z" fill="#FFFFFF"/>
-        
-        <!-- Textura de canas inferiores (líneas finas) -->
-        <path d="M 85 158 Q 100 168 115 158" stroke="#CBD5E1" stroke-width="2" fill="none"/>
-        <path d="M 90 148 Q 100 155 110 148" stroke="#CBD5E1" stroke-width="1.5" fill="none"/>
+        <!-- Cristal izquierdo con reflejo -->
+        <rect x="36" y="56" width="48" height="28" rx="7" fill="url(#glassReflect)"/>
+        <!-- Montura izquierda -->
+        <rect x="36" y="56" width="48" height="28" rx="7" stroke="url(#metalFrame)" stroke-width="3" fill="none"/>
+
+        <!-- Cristal derecho con reflejo -->
+        <rect x="116" y="56" width="48" height="28" rx="7" fill="url(#glassReflect)"/>
+        <!-- Montura derecha -->
+        <rect x="116" y="56" width="48" height="28" rx="7" stroke="url(#metalFrame)" stroke-width="3" fill="none"/>
+
+        <!-- Puente nasal doble realista -->
+        <path d="M 84 63 Q 100 60 116 63" stroke="url(#metalFrame)" stroke-width="2.8" fill="none"/>
+        <path d="M 86 67 Q 100 65 114 67" stroke="#94A3B8" stroke-width="1.5" fill="none"/>
+
+        <!-- Patillas laterales articuladas -->
+        <path d="M 16 62 L 36 62" stroke="url(#metalFrame)" stroke-width="3" stroke-linecap="round"/>
+        <path d="M 164 62 L 184 62" stroke="url(#metalFrame)" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="36" cy="62" r="2" fill="#64748B"/>
+        <circle cx="164" cy="62" r="2" fill="#64748B"/>
+
+        <!-- Destellos de luz diagonal sobre los cristales -->
+        <path d="M 42 58 L 62 82" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+        <path d="M 122 58 L 142 82" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
       </g>
     </svg>
 
