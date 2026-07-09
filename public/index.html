@@ -143,18 +143,41 @@
     }
 
     .btn-submit:disabled {
-      background-color: #475569;
       cursor: not-allowed;
     }
 
+    /* ANIMACIÓN BRILLI-BRILLI EN EL BOTÓN DE CARGA */
     .btn-submit.loading {
-      animation: pulseText 1.2s infinite ease-in-out;
+      animation: brilliantPulse 2.4s infinite ease-in-out;
+      box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
     }
 
-    @keyframes pulseText {
-      0% { opacity: 1; }
-      50% { opacity: 0.4; }
-      100% { opacity: 1; }
+    @keyframes brilliantPulse {
+      0% {
+        background-color: #A855F7; /* Morado Neón */
+        color: #FFFFFF;
+        opacity: 1;
+      }
+      25% {
+        background-color: #EC4899; /* Fucsia Neón */
+        color: #FFFFFF;
+        opacity: 0.7;
+      }
+      50% {
+        background-color: #EAB308; /* Amarillo Oro */
+        color: #0F172A; /* Texto oscuro para contrastar con el amarillo */
+        opacity: 1;
+      }
+      75% {
+        background-color: #EC4899; /* Fucsia Neón */
+        color: #FFFFFF;
+        opacity: 0.7;
+      }
+      100% {
+        background-color: #A855F7; /* Morado Neón */
+        color: #FFFFFF;
+        opacity: 1;
+      }
     }
 
     .result-box {
@@ -204,7 +227,7 @@
 
   <div class="container">
     
-    <!-- Avatar con chispas de IA (brilli-brilli) aún más grandes y llamativas -->
+    <!-- Avatar con chispas de IA (brilli-brilli) ampliadas -->
     <svg class="rajoy-avatar" viewBox="-40 -40 280 280" fill="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="metalFrame" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -327,7 +350,6 @@
     <div class="brand-title">MarIAno</div>
     <h1>La herramienta que aclara lo que ya estaba claro, y que además lo vuelve a aclarar por si fuera necesario.</h1>
     
-    <!-- Subtítulo con la frase exactamente recortada -->
     <p class="subtitle">Trae una noticia cualquiera y MarIAno te la explicará mejor <span class="parenthesis">(o no)</span>.</p>
 
     <form id="marIAnoForm">
