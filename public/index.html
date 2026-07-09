@@ -61,10 +61,10 @@
     }
 
     .rajoy-avatar {
-      width: 150px;
-      height: 150px;
-      max-width: 150px;
-      max-height: 150px;
+      width: 160px;
+      height: 160px;
+      max-width: 160px;
+      max-height: 160px;
       margin: 0 auto 12px auto;
       display: block;
     }
@@ -196,33 +196,41 @@
 
   <div class="container">
     
-    <!-- Caricatura basada exclusivamente en la foto image_810fae.jpg (Gafas metálicas y Barba blanca) -->
+    <!-- Caricatura realista basada en Captura de pantalla 2026-07-09 a las 10.47.37.jpg -->
     <svg class="rajoy-avatar" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- Gafas de montura metálica al estilo de la foto -->
-      <g id="gafas-foto">
+      <!-- Gafas metálicas estilizadas según la foto -->
+      <g id="gafas-realistas">
         <!-- Lente izquierda -->
-        <path d="M 42 70 C 42 62, 85 62, 85 70 C 85 85, 42 85, 42 70 Z" stroke="#334155" stroke-width="3.5" fill="none"/>
+        <rect x="38" y="58" width="46" height="26" rx="6" stroke="#1E293B" stroke-width="2.8" fill="none"/>
         <!-- Lente derecha -->
-        <path d="M 115 70 C 115 62, 158 62, 158 70 C 158 85, 115 85, 115 70 Z" stroke="#334155" stroke-width="3.5" fill="none"/>
-        <!-- Puente nasal central -->
-        <path d="M 85 68 Q 100 64 115 68" stroke="#334155" stroke-width="3.5" fill="none"/>
-        <!-- Patillas laterales -->
-        <line x1="25" y1="67" x2="42" y2="69" stroke="#334155" stroke-width="3"/>
-        <line x1="158" y1="69" x2="175" y2="67" stroke="#334155" stroke-width="3"/>
+        <rect x="116" y="58" width="46" height="26" rx="6" stroke="#1E293B" stroke-width="2.8" fill="none"/>
+        <!-- Puente nasal doble -->
+        <path d="M 84 65 Q 100 62 116 65" stroke="#1E293B" stroke-width="2.5" fill="none"/>
+        <path d="M 86 69 Q 100 67 114 69" stroke="#475569" stroke-width="1.8" fill="none"/>
+        <!-- Patillas y Bisagras -->
+        <path d="M 18 64 L 38 64" stroke="#1E293B" stroke-width="2.5"/>
+        <path d="M 162 64 L 182 64" stroke="#1E293B" stroke-width="2.5"/>
+        <!-- Reflejo suave en cristales -->
+        <line x1="44" y1="62" x2="58" y2="78" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+        <line x1="122" y1="62" x2="136" y2="78" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
       </g>
 
-      <!-- Barba blanca y canosa calcada de la sonrisa de la foto -->
-      <g id="barba-blanca-foto">
-        <!-- Bigote recortado sobre el labio superior -->
-        <path d="M 72 108 Q 100 102 128 108 C 122 118, 78 118, 72 108 Z" fill="#E2E8F0" stroke="#94A3B8" stroke-width="1.5"/>
-        <path d="M 80 108 Q 100 105 120 108 C 115 115, 85 115, 80 108 Z" fill="#FFFFFF"/>
+      <!-- Barba canosa detallada basada en la sonrisa de la foto -->
+      <g id="barba-realista">
+        <!-- Bigote recortado característico -->
+        <path d="M 68 102 C 82 98, 118 98, 132 102 C 126 114, 74 114, 68 102 Z" fill="#E2E8F0" stroke="#64748B" stroke-width="1.5"/>
+        <path d="M 74 102 C 86 100, 114 100, 126 102 C 120 110, 80 110, 74 102 Z" fill="#FFFFFF"/>
 
-        <!-- Cuerpo principal de la barba canosa -->
-        <path d="M 48 95 C 45 140, 68 175, 100 175 C 132 175, 155 140, 152 95 C 138 115, 132 138, 100 138 C 68 138, 62 115, 48 95 Z" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="2"/>
+        <!-- Masa principal de la barba -->
+        <path d="M 44 88 C 40 135, 62 178, 100 178 C 138 178, 160 135, 156 88 C 142 112, 132 136, 100 136 C 68 136, 58 112, 44 88 Z" fill="#F8FAFC" stroke="#94A3B8" stroke-width="2"/>
         
-        <!-- Sombra y volumen canoso inferior -->
-        <path d="M 58 115 C 56 142, 75 168, 100 168 C 125 168, 144 142, 142 115 C 130 132, 120 148, 100 148 C 80 148, 70 132, 58 115 Z" fill="#E2E8F0"/>
-        <path d="M 75 130 C 72 152, 85 165, 100 165 C 115 165, 128 152, 125 130 C 118 145, 110 155, 100 155 C 90 155, 82 145, 75 130 Z" fill="#FFFFFF"/>
+        <!-- Sombra de barbilla y tonos canosos laterales -->
+        <path d="M 52 108 C 48 138, 70 170, 100 170 C 130 170, 152 138, 148 108 C 136 128, 122 146, 100 146 C 78 146, 64 128, 52 108 Z" fill="#E2E8F0"/>
+        <path d="M 68 126 C 64 148, 80 162, 100 162 C 120 162, 136 148, 132 126 C 124 140, 112 150, 100 150 C 88 150, 76 140, 68 126 Z" fill="#FFFFFF"/>
+        
+        <!-- Textura de canas inferiores (líneas finas) -->
+        <path d="M 85 158 Q 100 168 115 158" stroke="#CBD5E1" stroke-width="2" fill="none"/>
+        <path d="M 90 148 Q 100 155 110 148" stroke="#CBD5E1" stroke-width="1.5" fill="none"/>
       </g>
     </svg>
 
