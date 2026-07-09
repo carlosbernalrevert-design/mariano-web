@@ -47,15 +47,16 @@ app.post('/transformar', async (req, res) => {
     });
   }
 
-  // 2. GENERAR COLUMNA VIA GROQ SEGÚN LAS REGLAS DE MARIANO
+  // 2. GENERAR COLUMNA VIA GROQ SEGÚN LAS REGLAS REFORZADAS DE MARIANO
   try {
     const prompt = `Tu tarea es transformar un texto en una columna hilarante escrita con el estilo inconfundible de un señor mayor, sobrio y registrador de la propiedad jubilado al estilo de Mariano Rajoy.
 Sigue estas reglas estrictamente:
 
 ### Reglas generales:
 1. La columna debe tener EXACTAMENTE 3 párrafos cortos, de máximo cuatro líneas cada uno.
-2. El tono debe ser de señor mayor solemnísimo, institucional y burocrático, pero diciendo obviedades absolutas con una vuelta de tuerca absurda y circular.
-3. Utiliza expresiones formales y señoriales propias de un registrador de la propiedad jubilado. Elige entre estas (variando entre párrafos):
+2. El tono debe ser de señor mayor solemnísimo, institucional y burocrático, pero redactando OBVIEDADES ABSOLUTAS Y TRIVIALIDADES EXTREMAS explicadas como si fueran axiomas jurídicos de profunda trascendencia.
+3. LÓGICA CIRCULAR Y REDUNDANCIA: Exagera las tautologías (ejemplo: "si algo sube, deja de estar abajo", "las cosas antes de ocurrir no han ocurrido", "cuando llovizna, la calle se moja a menos que esté techada").
+4. Utiliza expresiones formales y señoriales propias de un registrador de la propiedad jubilado. Elige entre estas (variando entre párrafos):
    - "Sería conveniente recordar..."
    - "Ya se sabe lo que pasa cuando..."
    - "Miremos por donde lo miremos..."
@@ -65,10 +66,9 @@ Sigue estas reglas estrictamente:
    - "Conviene no perder de vista que..."
    - "Si se me apura un poco..."
    - "Cualquier persona de bien comprende que..."
-4. REGLA DE NO REPETICIÓN: Está TOTALMENTE PROHIBIDO repetir la misma muletilla, conector o expresión señorial más de una vez en todo el texto (por ejemplo, si usas "A nadie se le escapa que" en el primer párrafo, NUNCA la vuelvas a usar en el segundo ni en el tercero). Usa conectores diferentes en cada párrafo.
-5. Explica el mundo con silogismos vacíos y lógica circular: explica cosas evidentes como si fueran descubrimientos de profunda transcendencia jurídica o social.
-6. Incluye obligatoriamente entre dos y tres dichos o refranes populares aplicados de forma sobria pero desatinada o redundante.
-7. PROHIBICIÓN ABSOLUTA DE CLICHÉS FAMOSOS: NO utilices frases reales ni clichés conocidos de Rajoy (NUNCA digas "los españoles son muy españoles", "el alcalde elige a los vecinos", ni "un plato es un plato"). Crea frases totalmente NUEVAS con esa misma estructura lógica.
+5. REGLA DE NO REPETICIÓN: Está TOTALMENTE PROHIBIDO repetir la misma muletilla o expresión señorial más de una vez en todo el texto. Usa conectores totalmente distintos en cada párrafo.
+6. Incluye obligatoriamente entre dos y tres dichos o refranes populares aplicados de forma sobria pero desatinada, literal o redundantemente explicada.
+7. PROHIBICIÓN ABSOLUTA DE CLICHÉS FAMOSOS: NO utilices frases reales ni clichés conocidos de Rajoy (NUNCA digas "los españoles son muy españoles", "el alcalde elige a los vecinos", ni "un plato es un plato"). EXCEPCIÓN ÚNICA: La frase "¡viva el vino!" sí está permitida únicamente si encaja como remate. Crea frases totalmente NUEVAS con esa misma lógica absurda.
 8. No menciones el artículo original, ni enlaces, ni autor. NO incluyas introducciones, ni saludos, ni ningún titular. Entrega DIRECTAMENTE los 3 párrafos.
 
 ### Ejemplos de estilo que debes imitar:
@@ -95,7 +95,7 @@ ${articleText.substring(0, 3000)}`;
           { role: 'user', content: prompt }
         ],
         max_tokens: 650,
-        temperature: 0.7
+        temperature: 0.75
       })
     });
 
@@ -108,7 +108,6 @@ ${articleText.substring(0, 3000)}`;
 
     const columnResult = groqData.choices?.[0]?.message?.content || "No se pudo generar la columna.";
 
-    // Encabezados aleatorios manteniendo "¡viva el vino!"
     const headers = [
       "Aquí tienes tu texto para que lo entienda todo el mundo, si es que todo el mundo lo puede entender, ¡viva el vino!",
       "Lo que está claro es que está claro, y el que no lo entienda es porque no lo ve, ¡viva el vino!",
