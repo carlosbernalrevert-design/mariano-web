@@ -48,7 +48,6 @@
       position: relative;
     }
 
-    /* Detalle elegante superior */
     .container::before {
       content: "";
       position: absolute;
@@ -141,7 +140,6 @@
       cursor: not-allowed;
     }
 
-    /* Animación de parpadeo suave cuando carga */
     .btn-submit.loading {
       animation: pulseText 1.2s infinite ease-in-out;
     }
@@ -152,7 +150,6 @@
       100% { opacity: 1; }
     }
 
-    /* Caja de resultados */
     .result-box {
       margin-top: 32px;
       text-align: left;
@@ -200,50 +197,36 @@
 
   <div class="container">
     
-    <!-- Caricatura de Mariano Rajoy con puro -->
+    <!-- Nueva caricatura minimalista: Solo gafas, barba y puro (sin cara) -->
     <svg class="rajoy-avatar" viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <ellipse cx="70" cy="58" rx="32" ry="36" fill="#FDE68A" stroke="#1E293B" stroke-width="2.5"/>
-      <path d="M 38 52 C 36 28, 50 18, 70 18 C 90 18, 104 28, 102 52 C 96 30, 72 24, 38 52 Z" fill="#94A3B8" stroke="#1E293B" stroke-width="2.5"/>
-      <path d="M 40 42 C 55 26, 85 26, 100 42" stroke="#E2E8F0" stroke-width="2" fill="none"/>
-
-      <path d="M 48 42 Q 56 38 62 43" stroke="#334155" stroke-width="3" stroke-linecap="round" fill="none"/>
-      <path d="M 78 43 Q 84 38 92 42" stroke="#334155" stroke-width="3" stroke-linecap="round" fill="none"/>
-
-      <ellipse cx="55" cy="48" rx="4" ry="2.5" fill="#1E293B"/>
-      <ellipse cx="85" cy="48" rx="4" ry="2.5" fill="#1E293B"/>
-      <path d="M 50 46 Q 55 44 60 46" stroke="#1E293B" stroke-width="1.5" fill="none"/>
-      <path d="M 80 46 Q 85 44 90 46" stroke="#1E293B" stroke-width="1.5" fill="none"/>
-
-      <rect x="42" y="42" width="24" height="15" rx="3" stroke="#0F172A" stroke-width="3" fill="none"/>
-      <rect x="74" y="42" width="24" height="15" rx="3" stroke="#0F172A" stroke-width="3" fill="none"/>
-      <line x1="66" y1="48" x2="74" y2="48" stroke="#0F172A" stroke-width="3"/>
-      <line x1="36" y1="46" x2="42" y2="46" stroke="#0F172A" stroke-width="2.5"/>
-      <line x1="98" y1="46" x2="104" y2="46" stroke="#0F172A" stroke-width="2.5"/>
-
-      <path d="M 70 48 L 65 62 L 73 62" stroke="#1E293B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-
-      <path d="M 42 64 C 42 88, 98 88, 98 64 C 92 82, 48 82, 42 64 Z" fill="#CBD5E1" stroke="#1E293B" stroke-width="2"/>
-      <path d="M 52 70 Q 70 88 88 70 Q 70 94 52 70 Z" fill="#64748B" opacity="0.4"/>
-
-      <path d="M 58 69 Q 70 73 82 69" stroke="#1E293B" stroke-width="2" stroke-linecap="round" fill="none"/>
-
-      <g id="puro">
-        <rect x="76" y="67" width="30" height="7" rx="2" fill="#78350F" stroke="#1E293B" stroke-width="1.5" transform="rotate(-10 76 67)"/>
-        <rect x="82" y="66" width="4" height="7.5" fill="#F59E0B" transform="rotate(-10 82 66)"/>
-        <ellipse cx="106" cy="61" rx="2" ry="3.5" fill="#EF4444"/>
-        <path d="M 107 58 Q 112 48 108 42 T 114 30" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.7"/>
+      <!-- Gafas de pasta sobria -->
+      <g id="gafas">
+        <rect x="30" y="38" width="34" height="22" rx="4" stroke="#0F172A" stroke-width="4" fill="none"/>
+        <rect x="76" y="38" width="34" height="22" rx="4" stroke="#0F172A" stroke-width="4" fill="none"/>
+        <line x1="64" y1="46" x2="76" y2="46" stroke="#0F172A" stroke-width="4"/>
+        <line x1="20" y1="44" x2="30" y2="44" stroke="#0F172A" stroke-width="3"/>
+        <line x1="110" y1="44" x2="120" y2="44" stroke="#0F172A" stroke-width="3"/>
       </g>
 
-      <path d="M 26 110 C 35 88, 105 88, 114 110" stroke="#1E293B" stroke-width="2.5" fill="#1E3A8A"/>
-      <polygon points="70,90 58,110 82,110" fill="#FFFFFF"/>
-      <polygon points="70,92 65,110 75,110" fill="#0F172A" stroke="#1E293B" stroke-width="1"/>
-      <path d="M 52 90 L 70 90 L 88 90" stroke="#FFFFFF" stroke-width="2.5"/>
+      <!-- Barba canosa icónica -->
+      <g id="barba">
+        <path d="M 38 68 C 38 102, 102 102, 102 68 C 94 94, 46 94, 38 68 Z" fill="#CBD5E1" stroke="#1E293B" stroke-width="2.5"/>
+        <path d="M 50 74 C 58 98, 82 98, 90 74 C 82 90, 58 90, 50 74 Z" fill="#94A3B8" opacity="0.5"/>
+      </g>
+
+      <!-- Puro habano encendido con humo -->
+      <g id="puro">
+        <rect x="72" y="70" width="36" height="9" rx="2.5" fill="#78350F" stroke="#1E293B" stroke-width="2" transform="rotate(-12 72 70)"/>
+        <rect x="79" y="69" width="5" height="9.5" fill="#F59E0B" transform="rotate(-12 79 69)"/>
+        <ellipse cx="109" cy="62" rx="2.5" ry="4" fill="#EF4444"/>
+        <path d="M 110 58 Q 116 46 111 38 T 118 24" stroke="#94A3B8" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.75"/>
+      </g>
     </svg>
 
     <div class="brand-title">MarIAno</div>
-    <h1>La herramienta que aclara lo que ya estaba claro, y que además lo vuelve a aclarar por si fuera necesario, o no.</h1>
+    <h1>La herramienta que aclara lo que ya estaba claro, y que además lo vuelve a aclarar por si fuera necesario.</h1>
     
-    <p class="subtitle">Trae un link cualquiera y <i>MarIAno</i> te convierte la información en una columna que entendería un niño de 5 años.</p>
+    <p class="subtitle">Trae un link cualquiera y MarIAno te explica la información para que la entiendas mejor, o no.</p>
 
     <form id="marIAnoForm">
       <div class="form-group">
@@ -282,7 +265,6 @@
       const url = input.value.trim();
       if (!url) return;
 
-      // Reset de estados y animación de espera
       errorBox.style.display = 'none';
       resultBox.style.display = 'none';
       submitBtn.disabled = true;
@@ -309,11 +291,10 @@
       } catch (err) {
         errorBox.textContent = err.message;
         errorBox.style.display = 'block';
-      } finally {
+      } opacity: 1;
         submitBtn.disabled = false;
         submitBtn.classList.remove('loading');
         submitBtn.textContent = 'MarlAnizar';
-      }
     });
   </script>
 </body>
