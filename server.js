@@ -50,23 +50,24 @@ app.post('/transformar', async (req, res) => {
   // 2. GENERAR COLUMNA VIA GROQ CON LAS INSTRUCCIONES OPTIMIZADAS
   try {
     const prompt = `Tu tarea es transformar un texto en una columna escrita con el estilo de Mariano Rajoy.
-Sigue estas reglas estrictamente:
+Sigue estas reglas strictly:
 
 ### Reglas generales
 1. La columna debe tener exactamente 3 párrafos cortos, de máximo cuatro líneas.
-2. El tono debe ser infantil‑solemne: frases muy obvias, redundantes y explicaciones de cosas evidentes, con importancia exagerada.
+2. El tono debe ser infantil‑solemne: frases muy obvias, redundantes y explicaciones de cosas evidentes, con importancia exaggerated.
 3. Habla como si fueras un adulto que explica el mundo a un niño de 5 años, creyendo que está diciendo algo muy profundo.
-4. No menciones el artículo original, ni el enlace, ni al autor. Solo genera la columna.
-5. Incluye ÚNICAMENTE UN (1) dicho o refrán popular en toda la respuesta (está prohibido incluir dos o más).
-6. No hagas introducciones de ningún tipo. Simplemente da el texto como lo diría Rajoy en tres párrafos. Sin redactar ningún titular.
-7. REGLA DE NO REPETICIÓN: Evita repetir la misma coletilla, muletilla o expresión en el mismo output.
+4. MULETILLA Y CONTRADICCIÓN: Haz que Mariano se líe un poco al hablar. Incluye al menos una vez la coletilla "o quizás no." al final de una frase, y justo a continuación haz que diga exactamente lo contrario de lo que acababa de afirmar.
+5. No menciones el artículo original, ni el enlace, ni al autor. Solo genera la columna.
+6. Incluye ÚNICAMENTE UN (1) dicho o refrán popular en toda la respuesta (está prohibido incluir dos o más).
+7. No hagas introducciones de ningún tipo. Simplemente da el texto como lo diría Rajoy en tres párrafos. Sin redactar ningún titular.
+8. REGLA DE NO REPETICIÓN: Evita repetir la misma coletilla o muletilla en el mismo output.
 
 ### Ejemplos de estilo que debes imitar:
 
 Ejemplo 1:
 “Estamos en cuartos de final. Eso significa que hemos ganado partidos antes, porque si no, no estaríamos aquí. Portugal es un equipo muy bueno, mejor que los malos. Ganaron la Eurocopa, que es un torneo de fútbol pero de Europa, y la Liga de las Naciones dos veces. Dos es más que uno.
 
-No sé lo que va a pasar en cuartos, porque el futuro todavía no ha pasado. Sin embargo, sí sé que España va a ganar. Puede parecer contradictorio pero no lo es. En Estados Unidos juegan al fútbol americano, que se llama fútbol pero no lo es. No es serio. Y Bélgica tiene a Courtois, que para goles, pero si no le tiramos no tiene nada que parar.
+No sé lo que va a pasar en cuartos, porque el futuro todavía no ha pasado. Sin embargo, sí sé que España va a ganar. O quizás no. En realidad, perder es una posibilidad muy real porque los rivales también juegan y meter goles es difícil. En Estados Unidos juegan al fútbol americano, que se llama fútbol pero no lo es. Y Bélgica tiene a Courtois, que para goles, pero si no le tiramos no tiene nada que parar.
 
 Nadie nos ha marcado todavía. Cero es un número muy bueno cuando es en contra. Otra cosa sería si fuera a favor. Luego vendrá Francia, pero eso es mañana y hoy es hoy. Enhorabuena a todos, incluidos los que animamos desde casa. No metemos goles, pero contamos. Aunque menos que los jugadores, claro.”
 
