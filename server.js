@@ -47,38 +47,42 @@ app.post('/transformar', async (req, res) => {
     });
   }
 
-  // 2. GENERAR COLUMNA VIA GROQ SEGÚN LAS REGLAS REFORZADAS DE MARIANO
+  // 2. GENERAR COLUMNA VIA GROQ SEGÚN LAS NUEVAS INSTRUCCIONES
   try {
-    const prompt = `Tu tarea es transformar un texto en una columna hilarante escrita con el estilo inconfundible de un señor mayor, sobrio y registrador de la propiedad jubilado al estilo de Mariano Rajoy.
-Sigue estas reglas estrictamente:
+    const prompt = `Tu tarea es transformar un texto en una columna escrita con el estilo de Mariano Rajoy.
+Sigue estas reglas strictly:
 
-### Reglas generales:
-1. La columna debe tener EXACTAMENTE 3 párrafos cortos, de máximo cuatro líneas cada uno.
-2. El tono debe ser de señor mayor solemnísimo, institucional y burocrático, pero redactando OBVIEDADES ABSOLUTAS Y TRIVIALIDADES EXTREMAS explicadas como si fueran axiomas jurídicos de profunda trascendencia.
-3. LÓGICA CIRCULAR Y REDUNDANCIA: Exagera las tautologías (ejemplo: "si algo sube, deja de estar abajo", "las cosas antes de ocurrir no han ocurrido", "cuando llovizna, la calle se moja a menos que esté techada").
-4. Utiliza expresiones formales y señoriales propias de un registrador de la propiedad jubilado. Elige entre estas (variando entre párrafos):
-   - "Sería conveniente recordar..."
-   - "Ya se sabe lo que pasa cuando..."
-   - "Miremos por donde lo miremos..."
-   - "Es un hecho incontrovertible que..."
-   - "A nadie se le escapa que..."
-   - "Como es natural y por todos sabido..."
-   - "Conviene no perder de vista que..."
-   - "Si se me apura un poco..."
-   - "Cualquier persona de bien comprende que..."
-5. REGLA DE NO REPETICIÓN: Está TOTALMENTE PROHIBIDO repetir la misma muletilla o expresión señorial más de una vez en todo el texto. Usa conectores totalmente distintos en cada párrafo.
-6. Incluye obligatoriamente entre dos y tres dichos o refranes populares aplicados de forma sobria pero desatinada, literal o redundantemente explicada.
-7. PROHIBICIÓN ABSOLUTA DE CLICHÉS FAMOSOS: NO utilices frases reales ni clichés conocidos de Rajoy (NUNCA digas "los españoles son muy españoles", "el alcalde elige a los vecinos", ni "un plato es un plato"). EXCEPCIÓN ÚNICA: La frase "¡viva el vino!" sí está permitida únicamente si encaja como remate. Crea frases totalmente NUEVAS con esa misma lógica absurda.
-8. No menciones el artículo original, ni enlaces, ni autor. NO incluyas introducciones, ni saludos, ni ningún titular. Entrega DIRECTAMENTE los 3 párrafos.
+### Reglas generales
+1. La columna debe tener exactamente 3 párrafos cortos, de máximo cuatro líneas.
+2. El tono debe ser infantil‑solemne: frases muy obvias, redundantes y explicaciones de cosas evidentes, con importancia exagerada.
+3. Habla como si fueras un adulto que explica el mundo a un niño de 5 años, creyendo que está diciendo algo muy profundo.
+4. No menciones el artículo original, ni el enlace, ni al autor. Solo genera la columna.
+5. Incluye un dicho o refrán popular en tus respuestas.
+6. No hagas introducciones de ningún tipo. Simplemente da el texto como lo diría Rajoy en tres párrafos. Sin redactar ningún titular.
+7. REGLA DE NO REPETICIÓN: Está estrictamente prohibido repetir la misma coletilla, muletilla o expresión en el mismo output.
 
 ### Ejemplos de estilo que debes imitar:
 
 Ejemplo 1:
-“Miremos por donde lo miremos, cuando un expediente entra por la puerta, la puerta deja de estar vacía porque en ella se encuentra el expediente. Sería conveniente recordar que las cosas que están puestas en un sitio no están en otro, a menos que se trasladen, en cuyo caso cambian de lugar. Quien mucho abarca poco aprieta, pero el que no abarca nada, se queda con las manos completamente libres.
+“Estamos en cuartos de final. Eso significa que hemos ganado partidos antes, porque si no, no estaríamos aquí. Portugal es un equipo muy bueno, mejor que los malos. Ganaron la Eurocopa, que es un torneo de fútbol pero de Europa, y la Liga de las Naciones dos veces. Dos es más que uno.
 
-Es un hecho incontrovertible que el día tiene sus horas y la noche tiene las suyas, lo cual permite que la gente duerma cuando no está despierta. Ya se sabe lo que pasa si se intenta cenar al mismo tiempo que se almuerza: que una de las dos comidas sobra. A buen hambre no hay pan duro, salvo que el pan sea de piedra, en cuyo caso resulta impracticable para la dentadura.
+No sé lo que va a pasar en cuartos, porque el futuro todavía no ha pasado. Sin embargo, sí sé que España va a ganar. Puede parecer contradictorio pero no lo es. En Estados Unidos juegan al fútbol americano, que se llama fútbol pero no lo es. No es serio. Y Bélgica tiene a Courtois, que para goles, pero si no le tiramos no tiene nada que parar.
 
-A nadie se le escapa que el futuro tiene la particularidad de que viene después, mientras que el pasado se caracteriza por haber ocurrido previamente. Como es natural y por todos sabido, si se decide no avanzar, uno se queda exactamente donde estaba al principio. Más vale pájaro en mano que ciento volando, salvo que se prefiera el vuelo de las aves desde la distancia.”
+Nadie nos ha marcado todavía. Cero es un número muy bueno cuando es en contra. Otra cosa sería si fuera a favor. Luego vendrá Francia, pero eso es mañana y hoy es hoy. Enhorabuena a todos, incluidos los que animamos desde casa. No metemos goles, pero contamos. Aunque menos que los jugadores, claro.”
+
+Ejemplo 2:
+“Hemos jugado mejor que antes y además hemos ganado, que es lo que hay que hacer para no perder. El seleccionador hizo cambios. Los cambios fueron buenos. Cuando los cambios son buenos, el equipo gana. Esto es lo que la experiencia dice y lo que ha pasado hoy.
+
+España no se ha puesto nerviosa. Los nervios son malos porque cuando te pones nervioso haces las cosas mal, y cuando haces las cosas mal, pierdes. Hoy España ha estado tranquila. Hay gente que nunca está tranquila y siempre cree que tiene razón. Esa gente existe y cada vez hay más. Pero hoy la calma ha ganado a los nervios, y eso es bueno.
+
+España es primera del grupo. Ser primero es mejor que ser segundo porque el primero está antes. Uruguay empató, que es peor que ganar. Con un empate ante ellos pasamos primeros y no nos toca Argentina, que es muy buena. Austria, Jordania o Argelia son menos buenas. Jugar contra equipos menos buenos es mejor que jugar contra equipos muy buenos.”
+
+Ejemplo 3:
+“Donald Trump ha pasado de estar muy enfadado a estar menos enfadado, lo cual demuestra que antes estaba enfadado y ahora ya no tanto. Cambiar de opinión significa que la idea que tienes por la tarde no es la misma que tenías por la mañana. A buen hambre no hay pan duro, y las cosas son como son y no como nos gustaría que fueran.
+
+Estados Unidos es un país que está muy lejos, pero que existe y tiene un presidente. Si no compras cosas a un país, ese país no te vende nada, porque comprar y vender son dos cosas distintas que van juntas. Los aviones vuelan porque están en el aire y, si no estuvieran en el aire, se quedarían en el suelo de Rota o de Morón.
+
+Pagar dinero cuesta dinero, y cuando pagas, tienes menos dinero pero la otra persona tiene más. Al final, estar enfadado es peor que no estarlo, porque estar contento es mucho mejor, y el que mucho abarca, poco aprieta. Mañana será otro día y volverá a salir el sol por donde sale siempre, que es por el este.”
 
 Texto a transformar:
 ${articleText.substring(0, 3000)}`;
@@ -95,7 +99,7 @@ ${articleText.substring(0, 3000)}`;
           { role: 'user', content: prompt }
         ],
         max_tokens: 650,
-        temperature: 0.75
+        temperature: 0.7
       })
     });
 
