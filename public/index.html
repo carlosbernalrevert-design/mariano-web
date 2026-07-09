@@ -222,13 +222,28 @@
           <stop offset="0%" stop-color="#94A3B8" stop-opacity="0.4"/>
           <stop offset="100%" stop-color="#475569" stop-opacity="0.1"/>
         </linearGradient>
+
+        <!-- Gradiente para el brillo IA -->
+        <linearGradient id="sparkleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#38BDF8"/>
+          <stop offset="50%" stop-color="#818CF8"/>
+          <stop offset="100%" stop-color="#C084FC"/>
+        </linearGradient>
       </defs>
 
-      <!-- BARBA Y BIGOTE REALISTAS -->
-      <g id="barba-hiperrealista">
-        <path d="M 40 85 C 36 138, 60 182, 100 182 C 140 182, 164 138, 160 85 C 144 112, 132 138, 100 138 C 68 138, 56 112, 40 85 Z" fill="url(#beardShadow)"/>
-        <path d="M 44 88 C 41 135, 62 178, 100 178 C 138 178, 159 135, 156 88 C 142 112, 130 135, 100 135 C 70 135, 58 112, 44 88 Z" fill="url(#beardBase)"/>
+      <!-- BARBA Y BIGOTE PEAGDOS EN UNA SOLA ESTRUCTURA CONTINUA -->
+      <g id="barba-unificada">
+        <!-- Sombra posterior integrada -->
+        <path d="M 40 82 C 36 138, 60 182, 100 182 C 140 182, 164 138, 160 82 C 144 100, 134 102, 100 102 C 66 102, 56 100, 40 82 Z" fill="url(#beardShadow)"/>
+        
+        <!-- Cuerpo principal continuo (barba y bigote fusionados) -->
+        <path d="M 42 85 C 40 135, 62 178, 100 178 C 138 178, 160 135, 158 85 C 140 92, 134 94, 100 94 C 66 94, 60 92, 42 85 Z" fill="url(#beardBase)"/>
 
+        <!-- Bigote pegado en la parte superior de la barba -->
+        <path d="M 64 88 C 80 84, 120 84, 136 88 C 138 106, 62 106, 64 88 Z" fill="url(#beardBase)" stroke="#E2E8F0" stroke-width="1"/>
+        <path d="M 68 89 Q 100 85 132 89 C 126 100, 74 100, 68 89 Z" fill="#FFFFFF"/>
+
+        <!-- Textura y filamentos de canas -->
         <g stroke="#94A3B8" stroke-width="1" opacity="0.6" stroke-linecap="round">
           <path d="M 52 105 C 50 128, 64 150, 80 162"/>
           <path d="M 148 105 C 150 128, 136 150, 120 162"/>
@@ -237,13 +252,9 @@
           <path d="M 72 135 C 80 152, 90 160, 100 162"/>
           <path d="M 128 135 C 120 152, 110 160, 100 162"/>
         </g>
-
-        <path d="M 66 100 C 82 95, 118 95, 134 100 C 128 114, 72 114, 66 100 Z" fill="url(#beardBase)" stroke="#CBD5E1" stroke-width="1"/>
-        <path d="M 70 100 Q 100 97 130 100 C 124 108, 76 108, 70 100 Z" fill="#FFFFFF"/>
-        <path d="M 74 100 Q 100 105 126 100" stroke="#64748B" stroke-width="1.2" stroke-dasharray="2 2" opacity="0.5"/>
       </g>
 
-      <!-- GAFAS METÁLICAS -->
+      <!-- GAFAS METÁLICAS CON CRISTALES -->
       <g id="gafas-hiperrealistas">
         <rect x="36" y="58" width="48" height="28" rx="7" fill="#0F172A" opacity="0.12"/>
         <rect x="116" y="58" width="48" height="28" rx="7" fill="#0F172A" opacity="0.12"/>
@@ -264,6 +275,19 @@
 
         <path d="M 42 58 L 62 82" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
         <path d="M 122 58 L 142 82" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+
+        <!-- ESTRELLAS BRILLI-BRILLI ESTILO IA EN LA ESQUINA SUPERIOR DE LAS GAFAS -->
+        <g id="sparkles-ia" fill="url(#sparkleGrad)">
+          <!-- Estrella principal (derecha) -->
+          <path d="M 162 50 Q 162 55 167 55 Q 162 55 162 60 Q 162 55 157 55 Q 162 55 162 50 Z"/>
+          <!-- Estrella secundaria (derecha) -->
+          <path d="M 154 45 Q 154 48 157 48 Q 154 48 154 51 Q 154 48 151 48 Q 154 48 154 45 Z"/>
+          <!-- Pequeño destello (derecha) -->
+          <circle cx="168" cy="46" r="1.2" fill="#38BDF8"/>
+
+          <!-- Destello sutil en la esquina izquierda -->
+          <path d="M 38 48 Q 38 51 41 51 Q 38 51 38 54 Q 38 51 35 51 Q 38 51 38 48 Z" opacity="0.8"/>
+        </g>
       </g>
     </svg>
 
