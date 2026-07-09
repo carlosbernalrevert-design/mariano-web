@@ -61,13 +61,13 @@
     }
 
     .rajoy-avatar {
-      width: 170px;
-      height: 170px;
-      max-width: 170px;
-      max-height: 170px;
+      width: 180px;
+      height: 180px;
+      max-width: 180px;
+      max-height: 180px;
       margin: 0 auto 12px auto;
       display: block;
-      filter: drop-shadow(0px 4px 6px rgba(15, 23, 42, 0.08));
+      filter: drop-shadow(0px 6px 12px rgba(15, 23, 42, 0.12));
     }
 
     .brand-title {
@@ -197,7 +197,7 @@
 
   <div class="container">
     
-    <!-- Caricatura hiperrealista basada en Captura de pantalla 2026-07-09 a las 11.02.24.png -->
+    <!-- Caricatura hiperrealista basada en Captura de pantalla 2026-07-09 a las 11.02.24.png con Brilli-Brilli resplandeciente -->
     <svg class="rajoy-avatar" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="metalFrame" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -223,27 +223,29 @@
           <stop offset="100%" stop-color="#475569" stop-opacity="0.1"/>
         </linearGradient>
 
-        <!-- Gradiente para el brillo IA -->
-        <linearGradient id="sparkleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#38BDF8"/>
-          <stop offset="50%" stop-color="#818CF8"/>
-          <stop offset="100%" stop-color="#C084FC"/>
+        <!-- Gradiente Neón Amarillo-Morado-Rosa para el Brilli-Brilli -->
+        <linearGradient id="sparkleYellowPurple" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FFD700"/>
+          <stop offset="50%" stop-color="#C084FC"/>
+          <stop offset="100%" stop-color="#E11D48"/>
+        </linearGradient>
+
+        <linearGradient id="sparkleGold" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FFE600"/>
+          <stop offset="100%" stop-color="#A855F7"/>
         </linearGradient>
       </defs>
 
-      <!-- BARBA Y BIGOTE PEAGDOS EN UNA SOLA ESTRUCTURA CONTINUA -->
+      <!-- BARBA Y BIGOTE PEGADOS EN UNA SOLA ESTRUCTURA -->
       <g id="barba-unificada">
-        <!-- Sombra posterior integrada -->
         <path d="M 40 82 C 36 138, 60 182, 100 182 C 140 182, 164 138, 160 82 C 144 100, 134 102, 100 102 C 66 102, 56 100, 40 82 Z" fill="url(#beardShadow)"/>
-        
-        <!-- Cuerpo principal continuo (barba y bigote fusionados) -->
         <path d="M 42 85 C 40 135, 62 178, 100 178 C 138 178, 160 135, 158 85 C 140 92, 134 94, 100 94 C 66 94, 60 92, 42 85 Z" fill="url(#beardBase)"/>
 
-        <!-- Bigote pegado en la parte superior de la barba -->
+        <!-- Bigote perfectamente unido -->
         <path d="M 64 88 C 80 84, 120 84, 136 88 C 138 106, 62 106, 64 88 Z" fill="url(#beardBase)" stroke="#E2E8F0" stroke-width="1"/>
         <path d="M 68 89 Q 100 85 132 89 C 126 100, 74 100, 68 89 Z" fill="#FFFFFF"/>
 
-        <!-- Textura y filamentos de canas -->
+        <!-- Filamentos de canas -->
         <g stroke="#94A3B8" stroke-width="1" opacity="0.6" stroke-linecap="round">
           <path d="M 52 105 C 50 128, 64 150, 80 162"/>
           <path d="M 148 105 C 150 128, 136 150, 120 162"/>
@@ -254,7 +256,7 @@
         </g>
       </g>
 
-      <!-- GAFAS METÁLICAS CON CRISTALES -->
+      <!-- GAFAS METÁLICAS -->
       <g id="gafas-hiperrealistas">
         <rect x="36" y="58" width="48" height="28" rx="7" fill="#0F172A" opacity="0.12"/>
         <rect x="116" y="58" width="48" height="28" rx="7" fill="#0F172A" opacity="0.12"/>
@@ -276,17 +278,24 @@
         <path d="M 42 58 L 62 82" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
         <path d="M 122 58 L 142 82" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
 
-        <!-- ESTRELLAS BRILLI-BRILLI ESTILO IA EN LA ESQUINA SUPERIOR DE LAS GAFAS -->
-        <g id="sparkles-ia" fill="url(#sparkleGrad)">
-          <!-- Estrella principal (derecha) -->
-          <path d="M 162 50 Q 162 55 167 55 Q 162 55 162 60 Q 162 55 157 55 Q 162 55 162 50 Z"/>
-          <!-- Estrella secundaria (derecha) -->
-          <path d="M 154 45 Q 154 48 157 48 Q 154 48 154 51 Q 154 48 151 48 Q 154 48 154 45 Z"/>
-          <!-- Pequeño destello (derecha) -->
-          <circle cx="168" cy="46" r="1.2" fill="#38BDF8"/>
+        <!-- ESTRELLAS BRILLI-BRILLI GIGANTES Y MULTICOLOR EN LAS GAFAS -->
+        <g id="sparkles-ia-destacados">
+          <!-- Estrella principal gigante derecha (Morado y Amarillo) -->
+          <path d="M 165 44 Q 165 52 173 52 Q 165 52 165 60 Q 165 52 157 52 Q 165 52 165 44 Z" fill="url(#sparkleYellowPurple)"/>
+          
+          <!-- Estrella secundaria amarilla arriba derecha -->
+          <path d="M 154 36 Q 154 41 159 41 Q 154 41 154 46 Q 154 41 149 41 Q 154 41 154 36 Z" fill="url(#sparkleGold)"/>
 
-          <!-- Destello sutil en la esquina izquierda -->
-          <path d="M 38 48 Q 38 51 41 51 Q 38 51 38 54 Q 38 51 35 51 Q 38 51 38 48 Z" opacity="0.8"/>
+          <!-- Destello brillante morado abajo a la derecha -->
+          <path d="M 174 58 Q 174 61 177 61 Q 174 61 174 64 Q 174 61 171 61 Q 174 61 174 58 Z" fill="#C084FC"/>
+
+          <!-- Puntos fucsia/amarillos flotantes -->
+          <circle cx="178" cy="38" r="2" fill="#FFD700"/>
+          <circle cx="147" cy="50" r="1.5" fill="#E11D48"/>
+
+          <!-- Estrella secundaria izquierda (Amarillo Neón) -->
+          <path d="M 36 42 Q 36 47 41 47 Q 36 47 36 52 Q 36 47 31 47 Q 36 47 36 42 Z" fill="url(#sparkleGold)"/>
+          <circle cx="28" cy="44" r="1.8" fill="#C084FC"/>
         </g>
       </g>
     </svg>
@@ -294,7 +303,7 @@
     <div class="brand-title">MarIAno</div>
     <h1>La herramienta que aclara lo que ya estaba claro, y que además lo vuelve a aclarar por si fuera necesario.</h1>
     
-    <p class="subtitle">Trae una noticia cualquiera y MarIAno te la explica para que la entiendas mejor, o no.</p>
+    <p class="subtitle">Trae una noticia cualquiera y MarIAno te la explica para que la entiendas mejor (o no).</p>
 
     <form id="marIAnoForm">
       <div class="form-group">
